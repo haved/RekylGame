@@ -71,7 +71,7 @@ public class Main
 			canvas.tick();
 			canvas.render();
 			Display.update();
-			Display.sync(24);
+			Display.sync(30);
 		}
 	}
 	
