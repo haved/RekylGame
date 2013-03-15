@@ -103,6 +103,16 @@ public class RenderEngine
 		
 		glTranslatef(x, y, 0);
 		
+		drawSquareWithTexture(x, y, width, height, x2, y2, width2, height2);
+		
+		glDisable(GL_TEXTURE_2D);
+		
+		glPopMatrix();
+	}
+	
+	public void drawSquareWithTexture(int x, int y, int width, int height,
+			int x2, int y2, int width2, int height2)
+	{
 		float tX = x2 / currentSize;
 		float tY = y2 / currentSize;
 		float tW = width2 / currentSize;
@@ -120,10 +130,6 @@ public class RenderEngine
 			glVertex2f(0, height);
 		}
 		glEnd();
-		
-		glDisable(GL_TEXTURE_2D);
-		
-		glPopMatrix();
 	}
 	
 	public void fillRect(int x, int y, int width, int height)

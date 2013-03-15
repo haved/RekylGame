@@ -7,6 +7,7 @@ import com.game.guiObject.GuiObjButton;
 
 public class GuiPauseMenu extends GuiContainer implements ButtonListener
 {
+	public int size = 50;
 	public GuiObjButton[] buttons;
 	
 	public GuiPauseMenu(GuiGame parent)
@@ -18,9 +19,9 @@ public class GuiPauseMenu extends GuiContainer implements ButtonListener
 	public void initButtons()
 	{
 		buttons = new GuiObjButton[2];
-		buttons[0] = new GuiObjButton("Back to game", 200, 450, 400, 50);
+		buttons[0] = new GuiObjButton("Back to game", 300, 450, 200, 50);
 		buttons[0].setListener(this);
-		buttons[1] = new GuiObjButton("Main Menu", 200, 520, 400, 50);
+		buttons[1] = new GuiObjButton("Main Menu", 300, 520, 200, 50);
 		buttons[1].setListener(this);
 		
 		add(buttons[0]);
@@ -30,6 +31,11 @@ public class GuiPauseMenu extends GuiContainer implements ButtonListener
 	@Override
 	public void tick()
 	{
+		size++;
+		if(size >= 100)
+		{
+			size = 0;
+		}
 		tickObj();
 	}
 
@@ -38,7 +44,14 @@ public class GuiPauseMenu extends GuiContainer implements ButtonListener
 	{
 		parent.render();
 		renderGrayBackground();
+		renderCustomText();
 		renderObj();
+	}
+	
+	private void renderCustomText()
+	{
+		Main.renderEngine.bindTexture("gui.png");
+		Main.renderEngine.drawTexture(272, 300, 256, 280, 0, 96, 100, 94);
 	}
 	
 	protected void renderGrayBackground()

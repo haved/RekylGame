@@ -9,11 +9,11 @@ import com.game.entity.Entity;
 
 public class GuiGame extends GuiScreen
 {
-	public ArrayList<Entity> list;
+	public ArrayList<Entity> entities;
 	
 	public GuiGame()
 	{
-		
+		entities = new ArrayList<Entity>();
 	}
 	
 	@Override
