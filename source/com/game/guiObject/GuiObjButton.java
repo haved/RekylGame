@@ -5,6 +5,7 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.game.Main;
+import com.game.RenderEngine;
 
 public class GuiObjButton extends GuiObject 
 {
@@ -50,6 +51,7 @@ public class GuiObjButton extends GuiObject
 	public void render()
 	{
 		Main.renderEngine.bindTexture("gui.png");
+		RenderEngine.resetColor();
 		int yI = 0;
 		
 		if(mouseOver & mouseDown)

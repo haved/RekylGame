@@ -18,6 +18,7 @@ public class RenderEngine
 	private float currentSize;
 	
 	private TrueTypeFont font;
+	private TrueTypeFont customFont;
 	
 	public RenderEngine()
 	{
@@ -142,7 +143,29 @@ public class RenderEngine
 		glPopMatrix();
 	}
 	
+	public void setCustomFont(Font f, boolean antiAlias)
+	{
+		customFont = new TrueTypeFont(f, antiAlias);
+	}
+	
 	public void drawText(int x, int y, String text, Color c)
+	{
+		drawFont(font, x, y, text, c);
+	}
+	
+	public void drawCustomText(int x, int y, String text, Color c)
+	{
+		if(customFont != null)
+		{
+			drawFont(customFont, x, y, text, c);
+		}
+		else
+		{
+			System.err.println("No custom font");
+		}
+	}
+	
+	private void drawFont(TrueTypeFont font, int x, int y, String text, Color c)
 	{
 		glEnable(GL_BLEND);
 		font.drawString(x, y, text, c);
@@ -157,5 +180,25 @@ public class RenderEngine
 	public int getTextHeight(String text)
 	{
 		return font.getHeight(text);
+	}
+	
+	public int getCustomTextLength(String text)
+	{
+		return customFont.getWidth(text);
+	}
+	
+	public int getCustomTextHeight(String text)
+	{
+		return customFont.getHeight(text);
+	}
+
+	public static void setGLColor(float red, float green, float blue, float alpha)
+	{
+		glColor4f(red, green, blue, alpha);
+	}
+
+	public static void resetColor()
+	{
+		setGLColor(1, 1, 1, 1);
 	}
 }
