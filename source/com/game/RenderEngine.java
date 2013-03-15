@@ -110,24 +110,43 @@ public class RenderEngine
 		glPopMatrix();
 	}
 	
+	public void drawTransparentTexture(int x, int y, int width, int height,
+			int x2, int y2, int width2, int height2)
+	{
+		glPushMatrix();
+		
+		glEnable (GL_BLEND);
+		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
+		
+		glTranslatef(x, y, 0);
+		
+		drawSquareWithTexture(x, y, width, height, x2, y2, width2, height2);
+		
+		glDisable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
+		
+		glPopMatrix();
+	}
+	
 	public void drawSquareWithTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
-		float tX = x2 / currentSize;
-		float tY = y2 / currentSize;
-		float tW = width2 / currentSize;
-		float tH = height2 / currentSize;
+		double tX = x2 / currentSize;
+		double tY = y2 / currentSize;
+		double tW = width2 / currentSize;
+		double tH = height2 / currentSize;
 		
 		glBegin(GL_QUADS);
 		{
-			glTexCoord2f(tX, tY);
-			glVertex2f(0, 0);
-			glTexCoord2f(tX + tW, tY);
-			glVertex2f(width, 0);
-			glTexCoord2f(tX + tW, tY + tH);
-			glVertex2f(width, height);
-			glTexCoord2f(tX, tY + tH);
-			glVertex2f(0, height);
+			glTexCoord2d(tX, tY);
+			glVertex2d(0, 0);
+			glTexCoord2d(tX + tW, tY);
+			glVertex2d(width, 0);
+			glTexCoord2d(tX + tW, tY + tH);
+			glVertex2d(width, height);
+			glTexCoord2d(tX, tY + tH);
+			glVertex2d(0, height);
 		}
 		glEnd();
 	}
@@ -147,6 +166,11 @@ public class RenderEngine
 		}
 		glEnd();
 		glPopMatrix();
+	}
+	
+	public void fillTransparentRect(int x, int y, int width, int height)
+	{
+		
 	}
 	
 	public void setCustomFont(Font f, boolean antiAlias)
@@ -173,6 +197,7 @@ public class RenderEngine
 	
 	private void drawFont(TrueTypeFont font, int x, int y, String text, Color c)
 	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 		font.drawString(x, y, text, c);
 		glDisable(GL_BLEND);

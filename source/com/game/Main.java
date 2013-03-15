@@ -45,9 +45,7 @@ public class Main
 		glDisable(GL_LIGHTING);                   
 		 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);               
-		glClearDepth(1);                                      
-		
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glClearDepth(1);
 		 
 		glViewport(0,0,width,height);
 		glMatrixMode(GL_MODELVIEW);

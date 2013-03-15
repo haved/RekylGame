@@ -1,32 +1,26 @@
 package com.game.gui;
 
-import java.util.ArrayList;
-
-import org.lwjgl.opengl.GL11;
-
-import com.game.Main;
-import com.game.entity.Entity;
+import com.game.world.World;
 
 public class GuiGame extends GuiScreen
 {
-	public ArrayList<Entity> entities;
+	public World world;
 	
 	public GuiGame()
 	{
-		entities = new ArrayList<Entity>();
+		world = new World();
 	}
 	
 	@Override
 	public void render()
 	{
-		GL11.glColor3f(1, 1, 1);
-		Main.renderEngine.fillRect(0, 0, 800, 640);
+		world.render();
 	}
 
 	@Override
 	public void tick()
 	{
-		
+		world.tick();
 	}
 	
 	@Override
