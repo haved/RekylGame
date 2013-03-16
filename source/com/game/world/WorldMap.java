@@ -1,7 +1,5 @@
 package com.game.world;
 
-import java.util.HashMap;
-
 public class WorldMap
 {
 	public static class Collumn
@@ -19,22 +17,54 @@ public class WorldMap
 		}
 	}
 	
-	private HashMap<Integer, Collumn> list;
+	private Collumn[] list;
+	private int scroll;
+	private int newscroll;
 	
 	public WorldMap()
 	{
-		list = new HashMap<Integer, Collumn>();
+		list = new Collumn[40];
 	}
 	
 	public Collumn getCollumn(int x)
 	{
-		if(list.containsKey(x))
+		x = x - scroll;
+		
+		if(x >= 0 & x < list.length)
 		{
-			return list.get(x);
+			return list[x];
 		}
-		else
+		return null;
+	}
+
+	public void removeCollumns(int cap)
+	{
+		cap = cap - scroll;
+		for(int i = 0; i < cap; i++)
 		{
-			return new Collumn();
+			list[i] = null;
+			newscroll++;
 		}
+	}
+	
+	public void addNewCollumns(Collumn[] newCollums)
+	{
+		Collumn[] newList = new Collumn[newCollums.length + list.length - (newscroll - scroll)];
+		
+		for(int i = 0; i < newList.length; i++)
+		{
+			if(i <  newList.length - newCollums.length)
+			{
+				newList[i] = list[i + newscroll];
+			}
+			else
+			{
+				newList[i] = newCollums[newList.length - newCollums.length + i];
+			}
+		}
+		
+		list = newList;
+		
+		scroll = newscroll;
 	}
 }
