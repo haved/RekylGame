@@ -15,7 +15,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class RenderEngine
 {
 	private HashMap<String, Texture> list;
-	private float currentSize;
+	private int currentSize;
 	
 	private TrueTypeFont font;
 	private TrueTypeFont customFont;
@@ -132,10 +132,10 @@ public class RenderEngine
 	public void drawSquareWithTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
-		double tX = (x2 + 0.3f) / currentSize;
-		double tY = (y2 + 0.3f) / currentSize;
-		double tW = (width2 - 0.6f) / currentSize;
-		double tH = (height2 - 0.6f) / currentSize;
+		float tX = (x2 + 0.3f) / currentSize;
+		float tY = (y2 + 0.3f) / currentSize;
+		float tW = (width2 - 0.6f) / currentSize;
+		float tH = (height2 - 0.6f) / currentSize;
 		
 		glBegin(GL_QUADS);
 		{
