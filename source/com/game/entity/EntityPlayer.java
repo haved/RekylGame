@@ -1,31 +1,45 @@
 package com.game.entity;
 
 import com.game.RenderEngine;
+import com.game.world.World;
 
 public class EntityPlayer extends Entity
 {
+	private byte renderAnim;
+	
 	public EntityPlayer()
 	{
 		xSpeed = 500;
-		ySpeed = 0;
+		y = 512 - 128;
 	}
 	
-	public void tick()
+	public void tick(World world)
 	{
-		ySpeed += 100;
-		
 		box = getNewCollisionBox(32, 64);
-		move();
+		
+		ySpeed += 100;
+		if(blockDown(world))
+		{
+			ySpeed = ySpeed - 4000;
+		}
+		
+		renderAnim++;
+		if(renderAnim >= 10)
+		{
+			renderAnim = 0;
+		}
+		
+		move(world);
 	}
 	
 	public void render()
 	{
 		RenderEngine.bindTexture("sprites.png");
-		RenderEngine.drawTransparentTexture(x, y, 32, 64, 0, 0, 16, 32);
+		RenderEngine.drawTransparentTexture(x, y, 32, 64, renderAnim < 5 ? 0 : 16, 0, 16, 32);
 	}
 
 	public int getScroll()
 	{
-		 return Math.min(0, -x + 256);
+		 return Math.max(0, x - 256);
 	}
 }
