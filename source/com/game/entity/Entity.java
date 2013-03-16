@@ -172,7 +172,7 @@ public class Entity
 		
 		for(; yMin <= yMax; yMin++)
 		{
-			if(world.hasBlockCollision(yMin, x))
+			if(world.hasBlockCollision(x, yMin))
 			{
 				return true;
 			}
@@ -194,7 +194,7 @@ public class Entity
 		
 		for(; yMin <= yMax; yMin++)
 		{
-			if(world.hasBlockCollision(yMin, x))
+			if(world.hasBlockCollision(x, yMin))
 			{
 				return true;
 			}

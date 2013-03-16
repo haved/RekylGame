@@ -8,10 +8,11 @@ import com.game.world.World;
 public class EntityPlayer extends Entity
 {
 	private byte renderAnim;
+	private int wantedSpeed = 500;
 	
 	public EntityPlayer()
 	{
-		xSpeed = 500;
+		xSpeed = wantedSpeed;
 		y = 512 - 128;
 	}
 	
@@ -21,13 +22,31 @@ public class EntityPlayer extends Entity
 		
 		box = getNewCollisionBox(32, 64);
 		ySpeed += 100;
+		fixSpeed(world);
 		
+		move(world);
+	}
+	
+	private void fixSpeed(World world)
+	{
 		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE))
 		{
 			ySpeed -= 200;
 		}
 		
-		move(world);
+		if(xSpeed < wantedSpeed & blockDown(world))
+		{
+			if(blockDown(world))
+			{
+				xSpeed += 75;
+			}
+			else
+			{
+				xSpeed += 25;
+			}
+		}
+		
+		xSpeed = Math.min(xSpeed, wantedSpeed);
 	}
 	
 	private void anim()
