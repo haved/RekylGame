@@ -6,8 +6,10 @@ public class Entity
 {
 	protected boolean hasCollision;
 	
-	protected int x;
-	protected int y;
+	private boolean isDead;
+	
+	public int x;
+	public int y;
 	
 	protected int xSpeed;
 	protected int ySpeed;
@@ -19,6 +21,16 @@ public class Entity
 	public Entity()
 	{
 		
+	}
+	
+	public void kill()
+	{
+		isDead = true;
+	}
+	
+	public boolean isDead()
+	{
+		return isDead;
 	}
 	
 	public void render()
@@ -44,7 +56,7 @@ public class Entity
 		
 		while(ySlow >= 100)
 		{
-			y--;
+			y++;
 			ySlow -= 100;
 		}
 		
@@ -59,5 +71,10 @@ public class Entity
 			y--;
 			ySlow += 100;
 		}
+	}
+
+	protected Rectangle getNewCollisionBox(int width, int height)
+	{
+		return new Rectangle(x, y, width, height);
 	}
 }
