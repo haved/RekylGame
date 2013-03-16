@@ -4,7 +4,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
-import com.game.Main;
 import com.game.RenderEngine;
 
 public class GuiObjButton extends GuiObject 
@@ -50,7 +49,7 @@ public class GuiObjButton extends GuiObject
 	@Override
 	public void render()
 	{
-		Main.renderEngine.bindTexture("gui.png");
+		RenderEngine.bindTexture("gui.png");
 		RenderEngine.resetColor();
 		int yI = 0;
 		
@@ -64,11 +63,11 @@ public class GuiObjButton extends GuiObject
 		}
 		
 		RenderEngine.push();
-		Main.renderEngine.drawTexture(x, y, width, height, 0, yI, 256, 32);
+		RenderEngine.drawTexture(x, y, width, height, 0, yI, 256, 32);
 		RenderEngine.pop();
 		
-		Main.renderEngine.drawText(x + (width - Main.renderEngine.getTextLength(text)) / 2,
-				y + (height - Main.renderEngine.getTextHeight(text)) / 2
+		RenderEngine.drawText(x + (width - RenderEngine.getTextLength(text)) / 2,
+				y + (height - RenderEngine.getTextHeight(text)) / 2
 				, text, Color.white);
 	}
 

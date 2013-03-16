@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import com.game.Main;
 import com.game.RenderEngine;
 import com.game.entity.Entity;
 import com.game.entity.EntityPlayer;
@@ -37,10 +36,24 @@ public class World
 	
 	public void render()
 	{
+		renderWorldScreen();
+		renderBar();
+	}
+	
+	private void renderWorldScreen()
+	{
 		RenderEngine.push();
 		GL11.glTranslatef(xScroll, 0, 0);
 		renderWorld();
 		renderEntities();
+		RenderEngine.pop();
+	}
+	
+	private void renderBar()
+	{
+		RenderEngine.push();
+		RenderEngine.setGLColor(0.6f, 0.6f, 0.6f, 1);
+		RenderEngine.fillRect(0, 512, 800, 128);
 		RenderEngine.pop();
 	}
 	
@@ -89,7 +102,7 @@ public class World
 	private void renderWorld()
 	{
 		RenderEngine.setGLColor(1, 1, 1, 1);
-		Main.renderEngine.fillRect(0, 0, 800, 640);
+		RenderEngine.fillRect(0, 0, 800, 640);
 	}
 	
 	private void renderEntities()
@@ -102,6 +115,6 @@ public class World
 
 	private void loadWorld()
 	{
-		
+		 
 	}
 }

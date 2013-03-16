@@ -1,6 +1,6 @@
 package com.game.entity;
 
-import com.game.Main;
+import com.game.RenderEngine;
 
 public class EntityPlayer extends Entity
 {
@@ -31,12 +31,12 @@ public class EntityPlayer extends Entity
 	
 	public void render()
 	{
-		Main.renderEngine.bindTexture("sprites.png");
-		Main.renderEngine.drawTransparentTexture(x, y, 32, 64, 0, 0, 16, 32);
+		RenderEngine.bindTexture("sprites.png");
+		RenderEngine.drawTransparentTexture(x, y, 32, 64, 0, 0, 16, 32);
 	}
 
 	public int getScroll()
 	{
-		 return Math.min(0, x - 64);
+		 return Math.min(0, -x + 256);
 	}
 }

@@ -11,7 +11,6 @@ import static org.lwjgl.opengl.GL11.*;
 public class Main
 {
 	public static Main instance;
-	public static RenderEngine renderEngine;
 	
 	public MainCanvas canvas;
 	
@@ -58,7 +57,7 @@ public class Main
 	private void setup()
 	{
 		canvas = new MainCanvas();
-		renderEngine = new RenderEngine();
+		RenderEngine.init();
 	}
 	
 	private void gameLoop()

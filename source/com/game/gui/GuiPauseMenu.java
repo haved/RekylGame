@@ -1,6 +1,5 @@
 package com.game.gui;
 
-import com.game.Main;
 import com.game.RenderEngine;
 import com.game.guiObject.ButtonListener;
 import com.game.guiObject.GuiObjButton;
@@ -50,15 +49,15 @@ public class GuiPauseMenu extends GuiContainer implements ButtonListener
 	
 	private void renderCustomText()
 	{
-		Main.renderEngine.bindTexture("gui.png");
-		Main.renderEngine.drawTexture(272, 300, 256, 280, 0, 96, 100, 94);
+		RenderEngine.bindTexture("gui.png");
+		RenderEngine.drawTexture(272, 300, 256, 280, 0, 96, 100, 94);
 	}
 	
 	protected void renderGrayBackground()
 	{
 		RenderEngine.push();
 		RenderEngine.setGLColor(0.6f, 0.6f, 0.6f, 0.6f);
-		Main.renderEngine.fillTransparentRect(0, 0, 800, 640);
+		RenderEngine.fillTransparentRect(0, 0, 800, 640);
 		RenderEngine.pop();
 	}
 

@@ -13,12 +13,11 @@ import static org.lwjgl.opengl.GL11.*;
 public class Debug
 {
 	public static Debug instance;
-	public static RenderEngine render;
 	
 	public void start()
 	{
 		createGLDisplay(800, 640);
-		render = new RenderEngine();
+		RenderEngine.init();
 		gameLoop();
 		destroy();
 	}
@@ -84,7 +83,7 @@ public class Debug
 		
 		glColor3f(1, 1, 1);
 		
-		render.fillRect(0, 0, 400, 640);
+		RenderEngine.fillRect(0, 0, 400, 640);
 	}
 	
 	public void destroy()

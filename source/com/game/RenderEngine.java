@@ -14,24 +14,24 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class RenderEngine
 {
-	private HashMap<String, Texture> list;
-	private int currentSize;
+	private static HashMap<String, Texture> list;
+	private static int currentSize;
 	
-	private TrueTypeFont font;
-	private TrueTypeFont customFont;
+	private static TrueTypeFont font;
+	private static TrueTypeFont customFont;
 	
-	public RenderEngine()
+	public static void init()
 	{
 		list = new HashMap<String, Texture>();
 		initFont();
 	}
 	
-	private void initFont()
+	private static void initFont()
 	{
 		font = new TrueTypeFont(new Font("Times New Roman", Font.PLAIN, 20), true);
 	}
 	
-	public void loadTexture(String location)
+	public static void loadTexture(String location)
 	{
 		if(location.endsWith("png"))
 		{
@@ -43,7 +43,7 @@ public class RenderEngine
 		}
 	}
 	
-	public void loadTexture(String type, String location)
+	public static void loadTexture(String type, String location)
 	{
 		if(list.containsKey(location))
 		{
@@ -60,13 +60,13 @@ public class RenderEngine
 		}
 	}
 	
-	private Texture loadTextureToApp(String type, String location) throws Exception
+	private static Texture loadTextureToApp(String type, String location) throws Exception
 	{
 		return TextureLoader.getTexture(type, new FileInputStream(
 				new File("bin/res/" + location)));
 	}
 	
-	public boolean bindTexture(String s)
+	public static boolean bindTexture(String s)
 	{
 		if(!list.containsKey(s))
 		{
@@ -82,19 +82,19 @@ public class RenderEngine
 		return false;
 	}
 	
-	private void bindTexture(Texture tex)
+	private static void bindTexture(Texture tex)
 	{
 		currentSize = tex.getImageWidth();
 		tex.bind();
 	}
 	
-	public Texture getTexture(String s)
+	public static Texture getTexture(String s)
 	{
 		return list.get(s);
 	}
 	
 	
-	public void drawTexture(int x, int y, int width, int height,
+	public static void drawTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
 		glEnable(GL_TEXTURE_2D);
@@ -104,7 +104,7 @@ public class RenderEngine
 		glDisable(GL_TEXTURE_2D);
 	}
 	
-	public void drawTransparentTexture(int x, int y, int width, int height,
+	public static void drawTransparentTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
 		glEnable (GL_BLEND);
@@ -117,7 +117,7 @@ public class RenderEngine
 		glDisable(GL_BLEND);
 	}
 	
-	public void drawSquareWithTexture(int x, int y, int width, int height,
+	public static void drawSquareWithTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
 		float tX = (x2 + 0.3f) / currentSize;
@@ -139,7 +139,7 @@ public class RenderEngine
 		glEnd();
 	}
 	
-	public void drawSqare(int x, int y, int width, int height)
+	public static void drawSqare(int x, int y, int width, int height)
 	{
 		glBegin(GL_QUADS);
 		{
@@ -151,12 +151,12 @@ public class RenderEngine
 		glEnd();
 	}
 	
-	public void fillRect(int x, int y, int width, int height)
+	public static void fillRect(int x, int y, int width, int height)
 	{
 		drawSqare(x, y, width, height);
 	}
 	
-	public void fillTransparentRect(int x, int y, int width, int height)
+	public static void fillTransparentRect(int x, int y, int width, int height)
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -164,17 +164,17 @@ public class RenderEngine
 		glDisable(GL_BLEND);
 	}
 	
-	public void setCustomFont(Font f, boolean antiAlias)
+	public static void setCustomFont(Font f, boolean antiAlias)
 	{
 		customFont = new TrueTypeFont(f, antiAlias);
 	}
 	
-	public void drawText(int x, int y, String text, Color c)
+	public static void drawText(int x, int y, String text, Color c)
 	{
 		drawFont(font, x, y, text, c);
 	}
 	
-	public void drawCustomText(int x, int y, String text, Color c)
+	public static void drawCustomText(int x, int y, String text, Color c)
 	{
 		if(customFont != null)
 		{
@@ -186,7 +186,7 @@ public class RenderEngine
 		}
 	}
 	
-	private void drawFont(TrueTypeFont font, int x, int y, String text, Color c)
+	private static void drawFont(TrueTypeFont font, int x, int y, String text, Color c)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
@@ -194,22 +194,22 @@ public class RenderEngine
 		glDisable(GL_BLEND);
 	}
 	
-	public int getTextLength(String text)
+	public static int getTextLength(String text)
 	{
 		return font.getWidth(text);
 	}
 	
-	public int getTextHeight(String text)
+	public static int getTextHeight(String text)
 	{
 		return font.getHeight(text);
 	}
 	
-	public int getCustomTextLength(String text)
+	public static int getCustomTextLength(String text)
 	{
 		return customFont.getWidth(text);
 	}
 	
-	public int getCustomTextHeight(String text)
+	public static int getCustomTextHeight(String text)
 	{
 		return customFont.getHeight(text);
 	}
