@@ -4,14 +4,14 @@ public class WorldMap
 {
 	public static class Collumn
 	{
-		public int[] blocks;
+		public byte[] blocks;
 		
 		public Collumn()
 		{
-			blocks = new int[14];
+			blocks = new byte[14];
 		}
 		
-		public Collumn(int[] blocks)
+		public Collumn(byte[] blocks)
 		{
 			this.blocks = blocks;
 		}
