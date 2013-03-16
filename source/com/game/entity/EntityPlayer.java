@@ -1,5 +1,7 @@
 package com.game.entity;
 
+import org.lwjgl.input.Keyboard;
+
 import com.game.RenderEngine;
 import com.game.world.World;
 
@@ -19,6 +21,11 @@ public class EntityPlayer extends Entity
 		
 		box = getNewCollisionBox(32, 64);
 		ySpeed += 100;
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE))
+		{
+			ySpeed -= 200;
+		}
 		
 		move(world);
 	}

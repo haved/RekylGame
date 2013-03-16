@@ -144,17 +144,17 @@ public class Entity
 			return true;
 		}
 		
-//		int xMin = box.getX() / 32;
-//		int xMax = (box.getX() + box.getWidth() -1) / 32;
-//		int y = (box.getY() + box.getHeight() + 1) / 32;
-//		
-//		for(; xMin <= xMax; xMin++)
-//		{
-//			if(world.hasBlockCollision(xMin, y))
-//			{
-//				return true;
-//			}
-//		}
+		int xMin = box.getX() / 32;
+		int xMax = (box.getX() + box.getWidth() -1) / 32;
+		int y = (box.getY() + box.getHeight() + 1) / 32;
+		
+		for(; xMin <= xMax; xMin++)
+		{
+			if(world.hasBlockCollision(xMin, y))
+			{
+				return true;
+			}
+		}
 		
 		return false;
 	}
