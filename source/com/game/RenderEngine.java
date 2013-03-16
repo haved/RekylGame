@@ -97,36 +97,24 @@ public class RenderEngine
 	public void drawTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
-		glPushMatrix();
-		
 		glEnable(GL_TEXTURE_2D);
-		
-		glTranslatef(x, y, 0);
 		
 		drawSquareWithTexture(x, y, width, height, x2, y2, width2, height2);
 		
 		glDisable(GL_TEXTURE_2D);
-		
-		glPopMatrix();
 	}
 	
 	public void drawTransparentTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
-		glPushMatrix();
-		
 		glEnable (GL_BLEND);
 		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
-		
-		glTranslatef(x, y, 0);
 		
 		drawSquareWithTexture(x, y, width, height, x2, y2, width2, height2);
 		
 		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
-		
-		glPopMatrix();
 	}
 	
 	public void drawSquareWithTexture(int x, int y, int width, int height,
@@ -140,13 +128,13 @@ public class RenderEngine
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2d(tX, tY);
-			glVertex2d(0, 0);
+			glVertex2d(x, y);
 			glTexCoord2d(tX + tW, tY);
-			glVertex2d(width, 0);
+			glVertex2d(x + width, y);
 			glTexCoord2d(tX + tW, tY + tH);
-			glVertex2d(width, height);
+			glVertex2d(x + width, y + height);
 			glTexCoord2d(tX, tY + tH);
-			glVertex2d(0, height);
+			glVertex2d(x, y + height);
 		}
 		glEnd();
 	}
@@ -155,34 +143,25 @@ public class RenderEngine
 	{
 		glBegin(GL_QUADS);
 		{
-			glVertex2f(0, 0);
-			glVertex2f(width, 0);
-			glVertex2f(width, height);
-			glVertex2f(0, height);
+			glVertex2f(x, y);
+			glVertex2f(x + width, y);
+			glVertex2f(x + width, y + height);
+			glVertex2f(x, y + height);
 		}
 		glEnd();
 	}
 	
 	public void fillRect(int x, int y, int width, int height)
 	{
-		glPushMatrix();
-		
-		glTranslatef(x, y, 0);
-		
 		drawSqare(x, y, width, height);
-		glPopMatrix();
 	}
 	
 	public void fillTransparentRect(int x, int y, int width, int height)
 	{
-		glPushMatrix();
-		
 		glEnable(GL_BLEND);
 		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glTranslatef(x, y, 0);
 		drawSqare(x, y, width, height);
 		glDisable(GL_BLEND);
-		glPopMatrix();
 	}
 	
 	public void setCustomFont(Font f, boolean antiAlias)
@@ -234,7 +213,17 @@ public class RenderEngine
 	{
 		return customFont.getHeight(text);
 	}
-
+	
+	public static void push()
+	{
+		glPushMatrix();
+	}
+	
+	public static void pop()
+	{
+		glPopMatrix();
+	}
+	
 	public static void setGLColor(float red, float green, float blue, float alpha)
 	{
 		glColor4f(red, green, blue, alpha);
