@@ -19,7 +19,6 @@ public class WorldMap
 	
 	private Collumn[] list;
 	private int scroll;
-	private int newscroll;
 	
 	public WorldMap()
 	{
@@ -36,15 +35,6 @@ public class WorldMap
 		}
 		return null;
 	}
-
-	public void removeCollumns(int cap)
-	{
-		cap = cap - scroll;
-		for(; newscroll < cap; newscroll++)
-		{
-			list[newscroll] = null;
-		}
-	}
 	
 	public boolean hittingEdge(int x)
 	{
@@ -53,23 +43,23 @@ public class WorldMap
 		return list.length - 2 < x;
 	}
 	
-	public void addNewCollumns(Collumn[] newCollumns)
+	public void addNewCollumns(int cap, Collumn[] newCollumns)
 	{
-		Collumn[] newList = new Collumn[newCollumns.length + list.length - (newscroll - scroll)];
+		Collumn[] newList = new Collumn[list.length - (cap - scroll) + newCollumns.length];
 		
 		for(int i = 0; i < newList.length; i++)
 		{
-			if(i < list.length - (newscroll - scroll))
+			if(i < list.length - (cap - scroll))
 			{
-				newList[i] = list[i + (newscroll - scroll)];
+				newList[i] = list[i + (cap - scroll)];
 			}
 			else
 			{
-				newList[i] = newCollumns[i - (list.length - (newscroll - scroll))];
+				newList[i] = newCollumns[i - (list.length - (cap - scroll))];
 			}
 		}
 		
 		list = newList;
-		scroll = newscroll;
+		scroll = cap;
 	}
 }

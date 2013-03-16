@@ -151,7 +151,6 @@ public class World
 
 	private void loadWorld()
 	{
-		 map.removeCollumns(xScroll / 32);
 		 if(map.hittingEdge((xScroll + 800) / 32))
 		 {
 			 Collumn[] col = new Collumn[20];
@@ -162,7 +161,7 @@ public class World
 				 col[i].blocks[i] = 1;
 			 }
 			 
-			 map.addNewCollumns(col);
+			 map.addNewCollumns(xScroll / 32, col);
 		 }
 	}
 }
