@@ -47,6 +47,13 @@ public class WorldMap
 		}
 	}
 	
+	public boolean hittingEdge(int x)
+	{
+		x = x - scroll;
+		
+		return list.length - 2 < x;
+	}
+	
 	public void addNewCollumns(Collumn[] newCollums)
 	{
 		Collumn[] newList = new Collumn[newCollums.length + list.length - (newscroll - scroll)];

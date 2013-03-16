@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import com.game.RenderEngine;
 import com.game.entity.Entity;
 import com.game.entity.EntityPlayer;
+import com.game.world.WorldMap.Collumn;
 
 public class World
 {
@@ -52,9 +53,18 @@ public class World
 	private void renderBar()
 	{
 		RenderEngine.push();
-		RenderEngine.setGLColor(0.6f, 0.6f, 0.6f, 1);
+		RenderEngine.setGLColor(0.2f, 0.2f, 0.2f, 1);
 		RenderEngine.fillRect(0, 512, 800, 128);
 		RenderEngine.pop();
+	}
+	
+	public int getBlock(int x, int y)
+	{
+		if(map.getCollumn(x) != null)
+		{
+			return map.getCollumn(x).blocks[y];
+		}
+		return 0;
 	}
 	
 	public ArrayList<Entity> getEntityList()
@@ -103,6 +113,8 @@ public class World
 	{
 		RenderEngine.setGLColor(1, 1, 1, 1);
 		RenderEngine.fillRect(0, 0, 800, 640);
+		
+		RenderEngine.bindTexture("sprites.png");
 	}
 	
 	private void renderEntities()
@@ -115,6 +127,10 @@ public class World
 
 	private void loadWorld()
 	{
-		 
+		 map.removeCollumns(xScroll / 32);
+		 if(map.hittingEdge((xScroll + 800) / 32))
+		 {
+			 map.addNewCollumns(new Collumn[10]);
+		 }
 	}
 }
