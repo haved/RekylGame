@@ -14,18 +14,7 @@ public class EntityPlayer extends Entity
 	{
 		ySpeed += 100;
 		
-		collisionBox = getNewCollisionBox(32, 64);
-		if(collisionBox.getY() + collisionBox.getHeight() >= 512)
-		{
-			ySpeed = (int)(-ySpeed / 1.05f);
-		}
-		
-		if(collisionBox.getX() + collisionBox.getWidth() > 800 |
-			collisionBox.getX() < 0)
-		{
-			xSpeed = -xSpeed;
-		}
-		
+		box = getNewCollisionBox(32, 64);
 		move();
 	}
 	

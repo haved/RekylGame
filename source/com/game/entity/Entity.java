@@ -3,9 +3,7 @@ package com.game.entity;
 import org.lwjgl.util.Rectangle;
 
 public class Entity
-{
-	protected boolean hasCollision;
-	
+{	
 	private boolean isDead;
 	
 	public int x;
@@ -16,7 +14,7 @@ public class Entity
 	protected int xSlow;
 	protected int ySlow;
 	
-	public Rectangle collisionBox;
+	public Rectangle box;
 	
 	public Entity()
 	{
@@ -72,7 +70,26 @@ public class Entity
 			ySlow += 100;
 		}
 	}
-
+	
+	public boolean blockUnder()
+	{
+		if(box == null)
+		{
+			return false;
+		}
+		
+		int xMin = box.getX() / 32;
+		int xMax = (box.getX() + box.getWidth() -1) / 32;
+		int y = (box.getY() + 1) / 32;
+		
+		for(; xMin <= xMax; xMin++)
+		{
+			
+		}
+		
+		return false;
+	}
+	
 	protected Rectangle getNewCollisionBox(int width, int height)
 	{
 		return new Rectangle(x, y, width, height);
