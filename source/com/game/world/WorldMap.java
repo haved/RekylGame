@@ -40,10 +40,9 @@ public class WorldMap
 	public void removeCollumns(int cap)
 	{
 		cap = cap - scroll;
-		for(int i = 0; i < cap; i++)
+		for(; newscroll < cap; newscroll++)
 		{
-			list[i] = null;
-			newscroll++;
+			list[newscroll] = null;
 		}
 	}
 	
@@ -54,24 +53,23 @@ public class WorldMap
 		return list.length - 2 < x;
 	}
 	
-	public void addNewCollumns(Collumn[] newCollums)
+	public void addNewCollumns(Collumn[] newCollumns)
 	{
-		Collumn[] newList = new Collumn[newCollums.length + list.length - (newscroll - scroll)];
+		Collumn[] newList = new Collumn[newCollumns.length + list.length - (newscroll - scroll)];
 		
 		for(int i = 0; i < newList.length; i++)
 		{
-			if(i <  newList.length - newCollums.length)
+			if(i < list.length - (newscroll - scroll))
 			{
-				newList[i] = list[i + newscroll];
+				newList[i] = list[i + (newscroll - scroll)];
 			}
 			else
 			{
-				newList[i] = newCollums[newList.length - newCollums.length + i];
+				newList[i] = newCollumns[i - (list.length - (newscroll - scroll))];
 			}
 		}
 		
 		list = newList;
-		
 		scroll = newscroll;
 	}
 }
