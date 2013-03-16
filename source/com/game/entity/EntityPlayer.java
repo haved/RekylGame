@@ -15,21 +15,21 @@ public class EntityPlayer extends Entity
 	
 	public void tick(World world)
 	{
+		anim();
+		
 		box = getNewCollisionBox(32, 64);
-		
 		ySpeed += 100;
-		if(blockDown(world))
-		{
-			ySpeed = ySpeed - 4000;
-		}
 		
+		move(world);
+	}
+	
+	private void anim()
+	{
 		renderAnim++;
 		if(renderAnim >= 10)
 		{
 			renderAnim = 0;
 		}
-		
-		move(world);
 	}
 	
 	public void render()
