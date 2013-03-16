@@ -34,4 +34,9 @@ public class EntityPlayer extends Entity
 		Main.renderEngine.bindTexture("sprites.png");
 		Main.renderEngine.drawTransparentTexture(x, y, 32, 64, 0, 0, 16, 32);
 	}
+
+	public int getScroll()
+	{
+		 return Math.min(0, x - 64);
+	}
 }

@@ -56,8 +56,10 @@ public class GuiPauseMenu extends GuiContainer implements ButtonListener
 	
 	protected void renderGrayBackground()
 	{
+		RenderEngine.push();
 		RenderEngine.setGLColor(0.6f, 0.6f, 0.6f, 0.6f);
 		Main.renderEngine.fillTransparentRect(0, 0, 800, 640);
+		RenderEngine.pop();
 	}
 
 	public void buttonPressed(GuiObjButton source)

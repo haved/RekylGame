@@ -63,7 +63,9 @@ public class GuiObjButton extends GuiObject
 			yI = 32;
 		}
 		
+		RenderEngine.push();
 		Main.renderEngine.drawTexture(x, y, width, height, 0, yI, 256, 32);
+		RenderEngine.pop();
 		
 		Main.renderEngine.drawText(x + (width - Main.renderEngine.getTextLength(text)) / 2,
 				y + (height - Main.renderEngine.getTextHeight(text)) / 2

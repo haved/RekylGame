@@ -48,7 +48,6 @@ public class Main
 		glClearDepth(1);
 		 
 		glViewport(0,0,width,height);
-		glMatrixMode(GL_MODELVIEW);
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();

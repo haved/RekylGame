@@ -2,6 +2,8 @@ package com.game.world;
 
 import java.util.ArrayList;
 
+import org.lwjgl.opengl.GL11;
+
 import com.game.Main;
 import com.game.RenderEngine;
 import com.game.entity.Entity;
@@ -12,6 +14,8 @@ public class World
 	public EntityPlayer player;
 	private ArrayList<Entity> newEntities;
 	private ArrayList<Entity> entities;
+	public int xScroll;
+	public WorldMap map;
 	
 	public World()
 	{
@@ -20,6 +24,24 @@ public class World
 		
 		player = new EntityPlayer();
 		entities.add(player);
+	}
+	
+	public void tick()
+	{
+		addNewEntities();
+		tickEntities();
+		removeDeadEntities();
+		xScroll = player.getScroll();
+		loadWorld();
+	}
+	
+	public void render()
+	{
+		RenderEngine.push();
+		GL11.glTranslatef(xScroll, 0, 0);
+		renderWorld();
+		renderEntities();
+		RenderEngine.pop();
 	}
 	
 	public ArrayList<Entity> getEntityList()
@@ -35,13 +57,6 @@ public class World
 	public void addEntity(Entity e)
 	{
 		newEntities.add(e);
-	}
-	
-	public void tick()
-	{
-		addNewEntities();
-		tickEntities();
-		removeDeadEntities();
 	}
 	
 	private void addNewEntities()
@@ -70,13 +85,7 @@ public class World
 			
 		}
 	}
-	
-	public void render()
-	{
-		renderWorld();
-		renderEntities();
-	}
-	
+		
 	private void renderWorld()
 	{
 		RenderEngine.setGLColor(1, 1, 1, 1);
@@ -89,5 +98,10 @@ public class World
 		{
 			e.render();
 		}
+	}
+
+	private void loadWorld()
+	{
+		
 	}
 }
