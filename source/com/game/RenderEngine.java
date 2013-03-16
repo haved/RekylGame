@@ -151,12 +151,8 @@ public class RenderEngine
 		glEnd();
 	}
 	
-	public void fillRect(int x, int y, int width, int height)
+	public void drawSqare(int x, int y, int width, int height)
 	{
-		glPushMatrix();
-		
-		glTranslatef(x, y, 0);
-		
 		glBegin(GL_QUADS);
 		{
 			glVertex2f(0, 0);
@@ -165,12 +161,28 @@ public class RenderEngine
 			glVertex2f(0, height);
 		}
 		glEnd();
+	}
+	
+	public void fillRect(int x, int y, int width, int height)
+	{
+		glPushMatrix();
+		
+		glTranslatef(x, y, 0);
+		
+		drawSqare(x, y, width, height);
 		glPopMatrix();
 	}
 	
 	public void fillTransparentRect(int x, int y, int width, int height)
 	{
+		glPushMatrix();
 		
+		glEnable(GL_BLEND);
+		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glTranslatef(x, y, 0);
+		drawSqare(x, y, width, height);
+		glDisable(GL_BLEND);
+		glPopMatrix();
 	}
 	
 	public void setCustomFont(Font f, boolean antiAlias)
