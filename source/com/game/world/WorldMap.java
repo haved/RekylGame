@@ -65,7 +65,7 @@ public class WorldMap
 		
 		for(int i = 0; i < entities.length; i++)
 		{
-			entities[i].x += (list.length + (cap - scroll)) * 32;
+			entities[i].x += (list.length + scroll) * 32;
 			world.addEntity(entities[i]);
 		}
 		
