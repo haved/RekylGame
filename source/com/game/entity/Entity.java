@@ -209,7 +209,7 @@ public class Entity
 		
 	}
 	
-	protected Rectangle getCollisionBox()
+	public Rectangle getCollisionBox()
 	{
 		return new Rectangle(x, y, xSize, ySize);
 	}

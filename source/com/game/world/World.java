@@ -3,6 +3,7 @@ package com.game.world;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Rectangle;
 import org.newdawn.slick.Color;
 
 import com.game.RenderEngine;
@@ -36,6 +37,7 @@ public class World
 	{
 		addNewEntities();
 		tickEntities();
+		chechEntitiesOnPlayer();
 		removeDeadEntities();
 		xScroll = player.getScroll();
 		loadWorld();
@@ -120,11 +122,32 @@ public class World
 		}
 	}
 	
+	private void chechEntitiesOnPlayer()
+	{
+		Rectangle pBox = player.getCollisionBox();
+		
+		for(Entity e:entities)
+		{
+			if(e instanceof EntityPlayer)
+			{
+				continue;
+			}
+			if(pBox.intersects(e.getCollisionBox()))
+			{
+				e.onCollisioWithPlayer(this, player);
+			}
+		}
+	}
+	
 	private void removeDeadEntities()
 	{
 		for(int i = 0; i < entities.size(); i++)
 		{
-			
+			if(entities.get(i).isDead())
+			{
+				entities.remove(i);
+				i--;
+			}
 		}
 	}
 		

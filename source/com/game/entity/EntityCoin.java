@@ -6,7 +6,7 @@ import com.game.world.World;
 public class EntityCoin extends Entity
 {
 	private int animation;
-	private int life = 100;
+	private int life = 400;
 	private int value = 10;
 	
 	public EntityCoin(int value)
