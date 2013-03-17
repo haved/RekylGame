@@ -9,6 +9,8 @@ import com.game.world.World;
 
 public class EntityPlayer extends Entity
 {
+	private static boolean wasDown;
+	
 	public static int rotPointX = 20;
 	public static int rotPointY = 40;
 	
@@ -28,18 +30,29 @@ public class EntityPlayer extends Entity
 	public void tick(World world)
 	{
 		anim();
-		
-		if(Mouse.isButtonDown(0))
-		{
-			world.fireGun(this, getRotation());
-		}
-		
+		tryShoot(world);
 		ySpeed += 100;
-		//fixSpeed(world);
+		fixSpeed(world);
 		
 		System.out.println(xSpeed);
 		
 		move(world);
+	}
+	
+	private void tryShoot(World world)
+	{
+		if(Mouse.isButtonDown(0))
+		{
+			if(!wasDown)
+			{
+				world.fireGun(this, getRotation());
+			}
+			wasDown = true;
+		}
+		else
+		{
+			wasDown = false;
+		}
 	}
 	
 	public void stop()
@@ -67,14 +80,17 @@ public class EntityPlayer extends Entity
 			{
 				xSpeed += 25;
 			}
+			
+			xSpeed = Math.min(xSpeed, wantedSpeed);
 		}
 		
 		if(xSpeed > wantedSpeed)
 		{
 			xSpeed =- 20;
+			xSpeed = Math.max(xSpeed, wantedSpeed);
 		}
 		
-		xSpeed = Math.min(xSpeed, wantedSpeed + 200);
+		//xSpeed = Math.min(xSpeed, wantedSpeed + 800);
 	}
 	
 	private void anim()
