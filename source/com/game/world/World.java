@@ -134,7 +134,7 @@ public class World
 			}
 			if(pBox.intersects(e.getCollisionBox()))
 			{
-				e.onCollisioWithPlayer(this, player);
+				e.onCollisionWithPlayer(this, player);
 			}
 		}
 	}

@@ -204,7 +204,7 @@ public class Entity
 		return false;
 	}
 	
-	public void onCollisioWithPlayer(World world, EntityPlayer player)
+	public void onCollisionWithPlayer(World world, EntityPlayer player)
 	{
 		
 	}

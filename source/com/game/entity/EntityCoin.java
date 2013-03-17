@@ -33,7 +33,7 @@ public class EntityCoin extends Entity
 	}
 	
 	@Override
-	public void onCollisioWithPlayer(World world, EntityPlayer player)
+	public void onCollisionWithPlayer(World world, EntityPlayer player)
 	{
 		world.addMoney(value);
 		kill();
@@ -45,3 +45,4 @@ public class EntityCoin extends Entity
 		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, animation<4 ? 0:8, 32, 8, 8);
 	}
 }
+   
