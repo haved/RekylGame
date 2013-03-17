@@ -38,6 +38,7 @@ public class EntityWave extends Entity
 		{
 			xSpeed += 100;
 		}
+		xSpeed = 0; //Debug
 		move(world);
 	}
 	

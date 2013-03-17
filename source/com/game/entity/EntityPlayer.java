@@ -86,11 +86,11 @@ public class EntityPlayer extends Entity
 		
 		if(xSpeed > wantedSpeed)
 		{
-			xSpeed =- 20;
-			xSpeed = Math.max(xSpeed, wantedSpeed);
+			xSpeed =- 5;
+			//xSpeed = Math.max(xSpeed, wantedSpeed);
 		}
 		
-		//xSpeed = Math.min(xSpeed, wantedSpeed + 800);
+		xSpeed = Math.min(xSpeed, wantedSpeed + 800);
 	}
 	
 	private void anim()
