@@ -120,10 +120,10 @@ public class RenderEngine
 	public static void drawSquareWithTexture(int x, int y, int width, int height,
 			int x2, int y2, int width2, int height2)
 	{
-		float tX = (x2 + 0.3f) / currentSize;
-		float tY = (y2 + 0.3f) / currentSize;
-		float tW = (width2 - 0.6f) / currentSize;
-		float tH = (height2 - 0.6f) / currentSize;
+		float tX = (x2 + 0.4f) / currentSize;
+		float tY = (y2 + 0.4f) / currentSize;
+		float tW = (width2 - 0.8f) / currentSize;
+		float tH = (height2 - 0.8f) / currentSize;
 		
 		glBegin(GL_QUADS);
 		{
