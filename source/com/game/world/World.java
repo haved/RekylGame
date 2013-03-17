@@ -10,20 +10,25 @@ import com.game.RenderEngine;
 import com.game.entity.Entity;
 import com.game.entity.EntityCoin;
 import com.game.entity.EntityPlayer;
+import com.game.entity.EntityWave;
+import com.game.gui.GuiGame;
 import com.game.world.WorldMap.Collumn;
 
 public class World
 {
-	private int money;
+	private GuiGame game;
 	
 	public EntityPlayer player;
+	public EntityWave wave;
 	private ArrayList<Entity> newEntities;
 	private ArrayList<Entity> entities;
 	public int xScroll;
 	public WorldMap map;
 	
-	public World()
+	public World(GuiGame game)
 	{
+		this.game = game;
+		
 		newEntities = new ArrayList<Entity>();
 		entities = new ArrayList<Entity>();
 		
@@ -63,8 +68,8 @@ public class World
 		RenderEngine.push();
 		RenderEngine.setGLColor(0.2f, 0.2f, 0.2f, 1);
 		RenderEngine.fillRect(0, 512, 800, 128);
-		RenderEngine.drawText(780 - RenderEngine.getTextLength("$" + money), 530,
-				"$" + money, Color.yellow);
+		RenderEngine.drawText(780 - RenderEngine.getTextLength("$" + game.money), 530,
+				"$" + game.money, Color.yellow);
 		RenderEngine.pop();
 	}
 	
@@ -100,7 +105,12 @@ public class World
 	
 	public void addMoney(int value)
 	{
-		this.money += value;
+		game.money += value;
+	}
+	
+	public void loose()
+	{
+		game.endGame();
 	}
 	
 	private void addNewEntities()

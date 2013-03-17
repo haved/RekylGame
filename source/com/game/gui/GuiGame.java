@@ -4,11 +4,22 @@ import com.game.world.World;
 
 public class GuiGame extends GuiScreen
 {
+	public int money;
 	public World world;
 	
 	public GuiGame()
 	{
-		world = new World();
+		startGame();
+	}
+	
+	public void startGame()
+	{
+		world = new World(this);
+	}
+	
+	public void endGame()
+	{
+		
 	}
 	
 	@Override
