@@ -2,6 +2,7 @@ package com.game.entity;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Color;
 
 import com.game.RenderEngine;
 import com.game.world.World;
@@ -90,6 +91,12 @@ public class EntityPlayer extends Entity
 		RenderEngine.resetColor();
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, renderAnim < 5 ? 0 : 16, 0, 16, 32);
+		if(y + ySize < 0)
+		{
+			RenderEngine.drawTransparentTexture(x, 0, 32, 32, renderAnim < 5 ? 0 : 16, 0, 16, 16);
+			RenderEngine.drawText(x + (32 - RenderEngine.getTextLength("" + -(y + ySize))) / 2, 30,
+					"" + -(y + ySize), Color.black);
+		}
 		w.renderGun(this, getRotation());
 	}
 
