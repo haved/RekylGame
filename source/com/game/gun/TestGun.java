@@ -15,17 +15,27 @@ public class TestGun extends Gun
 	public void fire(World w, EntityPlayer player, int rot)
 	{
 		w.addEntity(new BulletTest(getXPos(player), getYPos(player),
-				player.xSpeed + (getXAxis(rot + 2) * speed),
-				player.ySpeed + (getYAxis(rot + 2) * speed)));
+				player.xSpeed + getSpeedX(rot + 2),
+				player.ySpeed + getSpeedY(rot + 2)));
 		w.addEntity(new BulletTest(getXPos(player), getYPos(player),
-				player.xSpeed + (getXAxis(rot) * speed),
-				player.ySpeed + (getYAxis(rot) * speed)));
+				player.xSpeed + getSpeedX(rot),
+				player.ySpeed + getSpeedY(rot)));
 		w.addEntity(new BulletTest(getXPos(player), getYPos(player),
-				player.xSpeed + (getXAxis(rot - 2) * speed),
-				player.ySpeed + (getYAxis(rot - 2) * speed)));
+				player.xSpeed + getSpeedX(rot - 2),
+				player.ySpeed + getSpeedY(rot - 2)));
 		
 		player.xSpeed -= getXAxis(rot) * 100;
 		player.ySpeed -= getYAxis(rot) * 200;
+	}
+	
+	public int getSpeedX(int rot)
+	{
+		return (int) getXAxis(rot) * speed;
+	}
+	
+	public int getSpeedY(int rot)
+	{
+		return (int) getYAxis(rot) * speed;
 	}
 	
 	@Override
