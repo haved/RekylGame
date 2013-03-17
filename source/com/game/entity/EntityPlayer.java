@@ -34,7 +34,7 @@ public class EntityPlayer extends Entity
 			ySpeed -= 200;
 		}
 		
-		if(xSpeed < wantedSpeed & blockDown(world))
+		if(xSpeed < wantedSpeed)
 		{
 			if(blockDown(world))
 			{
@@ -62,6 +62,11 @@ public class EntityPlayer extends Entity
 	{
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x, y, 32, 64, renderAnim < 5 ? 0 : 16, 0, 16, 32);
+		if(box != null)
+		{
+			RenderEngine.setGLColor(0.2f, 0.2f, 0.2f, 0.5f);
+			RenderEngine.fillTransparentRect(box.getX(), box.getY(), box.getWidth(), box.getHeight());
+		}
 	}
 
 	public int getScroll()
