@@ -41,6 +41,7 @@ public class EntityCoin extends Entity
 	
 	public void render()
 	{
+		RenderEngine.resetColor();
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, animation<4 ? 0:8, 32, 8, 8);
 	}

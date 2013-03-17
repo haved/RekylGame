@@ -67,6 +67,7 @@ public class EntityPlayer extends Entity
 	
 	public void render()
 	{
+		RenderEngine.resetColor();
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, renderAnim < 5 ? 0 : 16, 0, 16, 32);
 	}
