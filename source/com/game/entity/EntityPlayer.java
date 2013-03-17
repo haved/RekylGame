@@ -34,7 +34,9 @@ public class EntityPlayer extends Entity
 		}
 		
 		ySpeed += 100;
-		fixSpeed(world);
+		//fixSpeed(world);
+		
+		System.out.println(xSpeed);
 		
 		move(world);
 	}

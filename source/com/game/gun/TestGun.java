@@ -25,7 +25,7 @@ public class TestGun extends Gun
 				getYAxis(rot - 2) * speed));
 		
 		player.xSpeed -= getXAxis(rot) * 100;
-		player.ySpeed -= getYAxis(rot) * 100;
+		player.ySpeed -= getYAxis(rot) * 200;
 	}
 	
 	@Override
