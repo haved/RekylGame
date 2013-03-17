@@ -8,7 +8,7 @@ import com.game.world.World;
 public class EntityPlayer extends Entity
 {
 	private static byte renderAnim;
-	private int wantedSpeed = 500;
+	private static int wantedSpeed = 500;
 	
 	public EntityPlayer()
 	{
@@ -48,7 +48,12 @@ public class EntityPlayer extends Entity
 			}
 		}
 		
-		xSpeed = Math.min(xSpeed, wantedSpeed);
+		if(xSpeed > wantedSpeed)
+		{
+			xSpeed =- 20;
+		}
+		
+		xSpeed = Math.min(xSpeed, wantedSpeed + 200);
 	}
 	
 	private void anim()

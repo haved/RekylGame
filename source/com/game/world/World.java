@@ -34,6 +34,8 @@ public class World
 		
 		player = new EntityPlayer();
 		entities.add(player);
+		wave = new EntityWave();
+		entities.add(wave);
 		
 		map = new WorldMap(this);
 	}
