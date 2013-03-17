@@ -29,7 +29,7 @@ public class World
 		player = new EntityPlayer();
 		entities.add(player);
 		
-		map = new WorldMap();
+		map = new WorldMap(this);
 	}
 	
 	public void tick()
@@ -165,24 +165,17 @@ public class World
 		 if(map.hittingEdge((xScroll + 800) / 32))
 		 {
 			 Collumn[] col = new Collumn[20];
+			 Entity[] entities = new Entity[12];
 			 
 			 for(int i = 0; i < 12; i++)
 			 {
 				 col[i] = new Collumn();
 				 col[i].blocks[i] = 1;
+				 entities[i] = new EntityCoin(10);
+				 entities[i].x = i * 32 + 32;
+				 entities[i].y = i * 32;
 			 }
-			 
-			 int scroll = map.addNewCollumns(xScroll / 32, col) + 32;
-			 
-			 Entity newEntity;
-			 
-			 for(int i = 0; i < 12; i++)
-			 {
-				 newEntity = new EntityCoin(10);
-				 newEntity.x = scroll + i * 32;
-				 newEntity.y = i;
-				 addEntity(newEntity);
-			 }
+			 map.addNewCollumns(xScroll / 32, col, entities); 
 		 }
 	}
 }

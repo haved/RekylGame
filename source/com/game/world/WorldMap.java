@@ -1,5 +1,7 @@
 package com.game.world;
 
+import com.game.entity.Entity;
+
 public class WorldMap
 {
 	public static class Collumn
@@ -17,11 +19,13 @@ public class WorldMap
 		}
 	}
 	
+	private World world;
 	private Collumn[] list;
 	private int scroll;
 	
-	public WorldMap()
+	public WorldMap(World world)
 	{
+		this.world = world;
 		list = new Collumn[40];
 	}
 	
@@ -43,7 +47,7 @@ public class WorldMap
 		return list.length - 2 < x;
 	}
 	
-	public int addNewCollumns(int cap, Collumn[] newCollumns)
+	public void addNewCollumns(int cap, Collumn[] newCollumns, Entity[] entities)
 	{
 		Collumn[] newList = new Collumn[list.length - (cap - scroll) + newCollumns.length];
 		
@@ -59,11 +63,13 @@ public class WorldMap
 			}
 		}
 		
-		int svar = list.length - (cap - scroll);
+		for(int i = 0; i < entities.length; i++)
+		{
+			entities[i].x += (list.length + (cap - scroll)) * 32;
+			world.addEntity(entities[i]);
+		}
 		
 		list = newList;
 		scroll = cap;
-		
-		return svar;
 	}
 }
