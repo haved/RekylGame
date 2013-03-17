@@ -16,7 +16,7 @@ public class EntityPlayer extends Entity
 	
 	private boolean stopped;
 	private static byte renderAnim;
-	private static int wantedSpeed = 500;
+	private static int wantedSpeed = 800;
 	
 	public EntityPlayer()
 	{
@@ -33,8 +33,6 @@ public class EntityPlayer extends Entity
 		tryShoot(world);
 		ySpeed += 100;
 		fixSpeed(world);
-		
-		System.out.println(xSpeed);
 		
 		move(world);
 	}
@@ -86,11 +84,12 @@ public class EntityPlayer extends Entity
 		
 		if(xSpeed > wantedSpeed)
 		{
-			xSpeed =- 5;
-			//xSpeed = Math.max(xSpeed, wantedSpeed);
+			xSpeed -= 5;
+			xSpeed = Math.max(xSpeed, wantedSpeed);
 		}
 		
-		xSpeed = Math.min(xSpeed, wantedSpeed + 800);
+		xSpeed = Math.min(xSpeed, wantedSpeed + 300);
+		xSpeed = Math.max(xSpeed, 0);
 	}
 	
 	private void anim()

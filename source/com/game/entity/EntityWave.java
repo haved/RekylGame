@@ -6,7 +6,7 @@ import com.game.world.World;
 public class EntityWave extends Entity
 {
 	private static int maxDistance = 300;
-	private static int normalSpeed = 450;
+	private static int normalSpeed = 750;
 	
 	private boolean hasWon;
 	

@@ -9,23 +9,23 @@ import com.game.world.World;
 
 public class TestGun extends Gun
 {
-	public int speed = 1000;
+	public int speed = 4000;
 	
 	@Override
 	public void fire(World w, EntityPlayer player, int rot)
 	{
 		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
-				getSpeedX(rot + 2),
-				getSpeedY(rot + 2)));
+				player.xSpeed + getSpeedX(rot + 2),
+				player.ySpeed + getSpeedY(rot + 2)));
 		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
-				getSpeedX(rot),
-				getSpeedY(rot)));
+				player.xSpeed + getSpeedX(rot),
+				player.ySpeed + getSpeedY(rot)));
 		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
-				getSpeedX(rot - 2),
-				getSpeedY(rot - 2)));
+				player.xSpeed + getSpeedX(rot - 2),
+				player.ySpeed + getSpeedY(rot - 2)));
 		
-		player.xSpeed -= getXAxis(rot) * 400;
-		player.ySpeed -= getYAxis(rot) * 800;
+		player.xSpeed -= getXAxis(rot) * 500;
+		player.ySpeed -= getYAxis(rot) * 1000;
 	}
 	
 	public int getSpeedX(int rot)
@@ -40,12 +40,12 @@ public class TestGun extends Gun
 	
 	public int getRealXPos(EntityPlayer player, int rot)
 	{
-		return (int) (getXPos(player) + (getXAxis(rot) * 18));
+		return (int) (getXPos(player) + (getXAxis(rot) * 18) + (player.xSpeed / 100));
 	}
 	
 	public int getRealYPos(EntityPlayer player, int rot)
 	{
-		return (int) (getYPos(player) + (getYAxis(rot) * 18));
+		return (int) (getYPos(player) + (getYAxis(rot) * 18) + (player.ySpeed / 100));
 	}
 	
 	@Override
