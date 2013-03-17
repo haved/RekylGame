@@ -6,7 +6,7 @@ import com.game.world.World;
 public class EntityCoin extends Entity
 {
 	private int animation;
-	private int life = 700;
+	private int life = 100;
 	private int value = 10;
 	
 	public EntityCoin(int value)
@@ -18,8 +18,6 @@ public class EntityCoin extends Entity
 	
 	public void tick(World w)
 	{
-		System.out.println(x+":"+y);
-		
 		life--;
 		animation++;
 		
@@ -28,7 +26,7 @@ public class EntityCoin extends Entity
 			kill();
 		}
 		
-		if(animation >= 4)
+		if(animation >= 8)
 		{
 			animation = 0;
 		}
@@ -44,7 +42,6 @@ public class EntityCoin extends Entity
 	public void render()
 	{
 		RenderEngine.bindTexture("sprites.png");
-		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, animation<2 ? 0:8, 32, 8, 8);
-		System.out.println("render");
+		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, animation<4 ? 0:8, 32, 8, 8);
 	}
 }

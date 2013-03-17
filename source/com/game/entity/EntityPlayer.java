@@ -7,7 +7,7 @@ import com.game.world.World;
 
 public class EntityPlayer extends Entity
 {
-	private byte renderAnim;
+	private static byte renderAnim;
 	private int wantedSpeed = 500;
 	
 	public EntityPlayer()
@@ -63,7 +63,7 @@ public class EntityPlayer extends Entity
 	public void render()
 	{
 		RenderEngine.bindTexture("sprites.png");
-		RenderEngine.drawTransparentTexture(x, y, 32, 64, renderAnim < 5 ? 0 : 16, 0, 16, 32);
+		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, renderAnim < 5 ? 0 : 16, 0, 16, 32);
 	}
 
 	public int getScroll()
