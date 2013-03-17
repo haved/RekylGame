@@ -7,6 +7,9 @@ import com.game.world.World;
 
 public class EntityPlayer extends Entity
 {
+	public static int rotPointX = 15;
+	public static int rotPointY;
+	
 	private boolean stopped;
 	private static byte renderAnim;
 	private static int wantedSpeed = 500;
@@ -74,11 +77,12 @@ public class EntityPlayer extends Entity
 		}
 	}
 	
-	public void render()
+	public void render(World w)
 	{
 		RenderEngine.resetColor();
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, renderAnim < 5 ? 0 : 16, 0, 16, 32);
+		w.renderGun(this, renderAnim * 5);
 	}
 
 	public int getScroll()

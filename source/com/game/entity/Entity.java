@@ -35,6 +35,11 @@ public class Entity
 		return isDead;
 	}
 	
+	public void render(World world)
+	{
+		render();
+	}
+	
 	public void render()
 	{
 		

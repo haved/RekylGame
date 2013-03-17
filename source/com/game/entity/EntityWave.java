@@ -47,7 +47,7 @@ public class EntityWave extends Entity
 	}
 	
 	public void customRender()
-	{
+	{ 
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x + 400, y, 180, 512,
 				208, 0, 48, 96);

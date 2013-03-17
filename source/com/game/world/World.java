@@ -116,6 +116,11 @@ public class World
 		game.endGame();
 	}
 	
+	public void renderGun(EntityPlayer player, int rot)
+	{
+		game.gun.render(player, rot);
+	}
+	
 	private void addNewEntities()
 	{
 		for(Entity e:newEntities)
@@ -192,7 +197,7 @@ public class World
 	{
 		for(Entity e:entities)
 		{
-			e.render();
+			e.render(this);
 		}
 	}
 

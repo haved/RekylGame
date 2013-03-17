@@ -1,9 +1,12 @@
 package com.game.gui;
 
+import com.game.gun.Gun;
+import com.game.gun.TestGun;
 import com.game.world.World;
 
 public class GuiGame extends GuiScreen
 {
+	public Gun gun;
 	public Integer money;
 	public World world;
 	
@@ -15,6 +18,7 @@ public class GuiGame extends GuiScreen
 	
 	public void startGame()
 	{
+		gun = new TestGun();
 		world = new World(this);
 	}
 	
