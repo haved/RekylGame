@@ -62,7 +62,7 @@ public class World
 	
 	public int getBlock(int x, int y)
 	{
-		if(map.getCollumn(x) != null && y < map.getCollumn(x).blocks.length & y > 0)
+		if(map.getCollumn(x) != null && y < map.getCollumn(x).blocks.length & y >= 0)
 		{
 			return map.getCollumn(x).blocks[y];
 		}
