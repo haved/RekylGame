@@ -4,7 +4,7 @@ import com.game.world.World;
 
 public class EntityBullet extends Entity
 {
-	private int life = 300;
+	private int life = 100;
 	
 	public void tick(World w)
 	{
@@ -13,6 +13,8 @@ public class EntityBullet extends Entity
 		{
 			kill();
 		}
+		
+		move(w);
 	}
 	
 	public void onHit(int xBlock, int yBlock)

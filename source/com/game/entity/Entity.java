@@ -12,13 +12,12 @@ public class Entity
 	public int x;
 	public int y;
 	
-	protected int xSize;
-	protected int ySize;
-	
-	protected int xSpeed;
-	protected int ySpeed;
+	public int xSpeed;
+	public int ySpeed;
 	protected int xSlow;
 	protected int ySlow;
+	protected int xSize;
+	protected int ySize;
 	
 	public Entity()
 	{

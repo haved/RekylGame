@@ -3,15 +3,29 @@ package com.game.gun;
 import org.lwjgl.opengl.GL11;
 
 import com.game.RenderEngine;
+import com.game.entity.BulletTest;
 import com.game.entity.EntityPlayer;
 import com.game.world.World;
 
 public class TestGun extends Gun
 {
+	public int speed = 1000;
+	
 	@Override
-	public void fire(World w, EntityPlayer player, int rotation)
+	public void fire(World w, EntityPlayer player, int rot)
 	{
+		w.addEntity(new BulletTest(getXPos(player), getYPos(player),
+				getXAxis(rot + 2) * speed,
+				getYAxis(rot + 2) * speed));
+		w.addEntity(new BulletTest(getXPos(player), getYPos(player),
+				getXAxis(rot) * speed,
+				getYAxis(rot) * speed));
+		w.addEntity(new BulletTest(getXPos(player), getYPos(player),
+				getXAxis(rot - 2) * speed,
+				getYAxis(rot - 2) * speed));
 		
+		player.xSpeed -= getXAxis(rot) * 100;
+		player.ySpeed -= getYAxis(rot) * 100;
 	}
 	
 	@Override

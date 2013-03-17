@@ -25,13 +25,13 @@ public class Gun
 		return player.y + EntityPlayer.rotPointY;
 	}
 	
-	public int getXAxis(int rot)
+	public float getXAxis(int rot)
 	{
-		return (int) Math.sin(Math.toRadians(rot));
+		return (float) Math.cos(Math.toRadians(rot));
 	}
 	
-	public int getYAxis(int rot)
+	public float getYAxis(int rot)
 	{
-		return (int) Math.cos(Math.toRadians(rot));
+		return (float) Math.sin(Math.toRadians(rot));
 	}
 }

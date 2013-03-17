@@ -28,7 +28,7 @@ public class EntityPlayer extends Entity
 	{
 		anim();
 		
-		if(Mouse.isButtonDown(1))
+		if(Mouse.isButtonDown(0))
 		{
 			world.fireGun(this, getRotation());
 		}
