@@ -1,14 +1,15 @@
 package com.game.entity;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import com.game.RenderEngine;
 import com.game.world.World;
 
 public class EntityPlayer extends Entity
 {
-	public static int rotPointX = 15;
-	public static int rotPointY;
+	public static int rotPointX = 20;
+	public static int rotPointY = 40;
 	
 	private boolean stopped;
 	private static byte renderAnim;
@@ -26,6 +27,11 @@ public class EntityPlayer extends Entity
 	public void tick(World world)
 	{
 		anim();
+		
+		if(Mouse.isButtonDown(1))
+		{
+			world.fireGun(this, getRotation());
+		}
 		
 		ySpeed += 100;
 		fixSpeed(world);
@@ -82,11 +88,29 @@ public class EntityPlayer extends Entity
 		RenderEngine.resetColor();
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x, y, xSize, ySize, renderAnim < 5 ? 0 : 16, 0, 16, 32);
-		w.renderGun(this, renderAnim * 5);
+		w.renderGun(this, getRotation());
 	}
 
 	public int getScroll()
 	{
 		 return Math.max(0, x - 256);
+	}
+
+	public int getRotation()
+	{
+		int posX = x - getScroll() + rotPointX;
+		int posY = 640 - (y + rotPointY);
+		
+		float xAxe = Mouse.getX() - posX;
+		int yAxe = -(Mouse.getY() - posY);
+		
+		int svar = (int) Math.toDegrees(Math.atan(yAxe / xAxe));
+		
+		if(xAxe < 0)
+		{
+			svar = svar - 180;
+		}
+		
+		return svar;
 	}
 }

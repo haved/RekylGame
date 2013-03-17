@@ -116,6 +116,11 @@ public class World
 		game.endGame();
 	}
 	
+	public void fireGun(EntityPlayer player, int rotation)
+	{
+		game.gun.fire(this, player, rotation);
+	}
+	
 	public void renderGun(EntityPlayer player, int rot)
 	{
 		game.gun.render(player, rot);

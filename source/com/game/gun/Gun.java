@@ -14,4 +14,24 @@ public class Gun
 	{
 		
 	}
+	
+	public int getXPos(EntityPlayer player)
+	{
+		return player.x + EntityPlayer.rotPointX;
+	}
+	
+	public int getYPos(EntityPlayer player)
+	{
+		return player.y + EntityPlayer.rotPointY;
+	}
+	
+	public int getXAxis(int rot)
+	{
+		return (int) Math.sin(Math.toRadians(rot));
+	}
+	
+	public int getYAxis(int rot)
+	{
+		return (int) Math.cos(Math.toRadians(rot));
+	}
 }
