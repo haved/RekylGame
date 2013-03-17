@@ -5,12 +5,12 @@ import com.game.world.World;
 
 public class EntityWave extends Entity
 {
-	private static int maxDistance = 150;
+	private static int maxDistance = 300;
 	private static int normalSpeed = 450;
 	
 	public EntityWave()
 	{
-		xSize = 80;
+		xSize = 280;
 		ySize = 512;
 		x = -maxDistance - xSize;
 	}
@@ -25,26 +25,30 @@ public class EntityWave extends Entity
 		{
 			xSpeed = Math.min(normalSpeed, xSpeed + 20);
 		}
-		if(world.player.x - (x + xSize) < maxDistance)
+		if(world.player.x - (x + xSize) > maxDistance)
 		{
-			x = world.player.x - xSize - maxDistance;
+			xSpeed += 100;
 		}
 		move(world);
 	}
 	
 	public void render()
 	{
+		//It has a custom render
+	}
+	
+	public void customRender()
+	{
 		RenderEngine.bindTexture("sprites.png");
-		RenderEngine.drawTransparentTexture(x, y, xSize + 40, 512,
+		RenderEngine.drawTransparentTexture(x + 200, y, 180, 512,
 				208, 0, 48, 96);
 		RenderEngine.setGLColor(0, 0, 0, 1);
-		RenderEngine.fillRect(x-1000, 0, 1000, 512);
+		RenderEngine.fillRect(x-1000, 0, 1200, 512);
 	}
 	
 	@Override
 	public void onCollisionWithPlayer(World world, EntityPlayer player)
 	{
-		System.out.println("YOU LOST");
-		world.loose();
+		player.stop();
 	}
 }

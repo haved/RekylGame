@@ -62,6 +62,7 @@ public class World
 		GL11.glTranslatef(-xScroll, 0, 0);
 		renderWorld();
 		renderEntities();
+		wave.customRender();
 		RenderEngine.pop();
 	}
 	

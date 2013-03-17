@@ -7,6 +7,7 @@ import com.game.world.World;
 
 public class EntityPlayer extends Entity
 {
+	private boolean stopped;
 	private static byte renderAnim;
 	private static int wantedSpeed = 500;
 	
@@ -29,8 +30,16 @@ public class EntityPlayer extends Entity
 		move(world);
 	}
 	
+	public void stop()
+	{
+		stopped = true;
+		xSpeed = 0;
+	}
+	
 	private void fixSpeed(World world)
 	{
+		if(stopped){xSpeed = 0; return;}
+		
 		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE))
 		{
 			ySpeed -= 200;

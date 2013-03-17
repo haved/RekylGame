@@ -4,11 +4,12 @@ import com.game.world.World;
 
 public class GuiGame extends GuiScreen
 {
-	public int money;
+	public Integer money;
 	public World world;
 	
 	public GuiGame()
 	{
+		money = new Integer(0);
 		startGame();
 	}
 	
@@ -19,7 +20,7 @@ public class GuiGame extends GuiScreen
 	
 	public void endGame()
 	{
-		
+		canvas.setGuiScreen(new GuiGameOver(this));
 	}
 	
 	@Override
