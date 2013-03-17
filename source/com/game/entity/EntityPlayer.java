@@ -14,13 +14,15 @@ public class EntityPlayer extends Entity
 	{
 		xSpeed = wantedSpeed;
 		y = 512 - 128;
+		xSize = 32;
+		ySize = 64;
+		hasCollision = true;
 	}
 	
 	public void tick(World world)
 	{
 		anim();
 		
-		box = getNewCollisionBox(32, 64);
 		ySpeed += 100;
 		fixSpeed(world);
 		
@@ -62,11 +64,6 @@ public class EntityPlayer extends Entity
 	{
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(x, y, 32, 64, renderAnim < 5 ? 0 : 16, 0, 16, 32);
-		if(box != null)
-		{
-			RenderEngine.setGLColor(0.2f, 0.2f, 0.2f, 0.5f);
-			RenderEngine.fillTransparentRect(box.getX(), box.getY(), box.getWidth(), box.getHeight());
-		}
 	}
 
 	public int getScroll()

@@ -43,7 +43,7 @@ public class WorldMap
 		return list.length - 2 < x;
 	}
 	
-	public void addNewCollumns(int cap, Collumn[] newCollumns)
+	public int addNewCollumns(int cap, Collumn[] newCollumns)
 	{
 		Collumn[] newList = new Collumn[list.length - (cap - scroll) + newCollumns.length];
 		
@@ -59,7 +59,11 @@ public class WorldMap
 			}
 		}
 		
+		int svar = list.length - (cap - scroll);
+		
 		list = newList;
 		scroll = cap;
+		
+		return svar;
 	}
 }

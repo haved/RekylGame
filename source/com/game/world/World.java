@@ -3,14 +3,18 @@ package com.game.world;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 
 import com.game.RenderEngine;
 import com.game.entity.Entity;
+import com.game.entity.EntityCoin;
 import com.game.entity.EntityPlayer;
 import com.game.world.WorldMap.Collumn;
 
 public class World
 {
+	private int money;
+	
 	public EntityPlayer player;
 	private ArrayList<Entity> newEntities;
 	private ArrayList<Entity> entities;
@@ -57,6 +61,8 @@ public class World
 		RenderEngine.push();
 		RenderEngine.setGLColor(0.2f, 0.2f, 0.2f, 1);
 		RenderEngine.fillRect(0, 512, 800, 128);
+		RenderEngine.drawText(780 - RenderEngine.getTextLength("$" + money), 530,
+				"$" + money, Color.yellow);
 		RenderEngine.pop();
 	}
 	
@@ -88,6 +94,11 @@ public class World
 	public void addEntity(Entity e)
 	{
 		newEntities.add(e);
+	}
+	
+	public void addMoney(int value)
+	{
+		this.money += value;
 	}
 	
 	private void addNewEntities()
@@ -161,7 +172,17 @@ public class World
 				 col[i].blocks[i] = 1;
 			 }
 			 
-			 map.addNewCollumns(xScroll / 32, col);
+			 int scroll = map.addNewCollumns(xScroll / 32, col) + 32;
+			 
+			 Entity newEntity;
+			 
+			 for(int i = 0; i < 12; i++)
+			 {
+				 newEntity = new EntityCoin(10);
+				 newEntity.x = scroll + i * 32;
+				 newEntity.y = i;
+				 addEntity(newEntity);
+			 }
 		 }
 	}
 }

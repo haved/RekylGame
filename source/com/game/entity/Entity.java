@@ -7,16 +7,18 @@ import com.game.world.World;
 public class Entity
 {	
 	private boolean isDead;
+	protected boolean hasCollision;
 	
 	public int x;
 	public int y;
+	
+	protected int xSize;
+	protected int ySize;
 	
 	protected int xSpeed;
 	protected int ySpeed;
 	protected int xSlow;
 	protected int ySlow;
-	
-	public Rectangle box;
 	
 	public Entity()
 	{
@@ -111,18 +113,18 @@ public class Entity
 	
 	public boolean blockUp(World world)
 	{
-		if(box == null)
+		if(!hasCollision)
 		{
 			return false;
 		}
 		
-		int xMin = box.getX() / 32;
-		int xMax = (box.getX() + box.getWidth() -1) / 32;
-		int y = (box.getY() - 1) / 32;
+		int xMin = x / 32;
+		int xMax = (x + xSize -1) / 32;
+		int yCord = (y - 1) / 32;
 		
 		for(; xMin <= xMax; xMin++)
 		{
-			if(world.hasBlockCollision(xMin, y))
+			if(world.hasBlockCollision(xMin, yCord))
 			{
 				return true;
 			}
@@ -133,24 +135,23 @@ public class Entity
 	
 	public boolean blockDown(World world)
 	{
-		if(box == null)
+		if(!hasCollision)
 		{
 			return false;
 		}
 		
-		if(box.getY() + box.getHeight() >= 512)
+		if(y + ySize >= 512)
 		{
-			y = 512 - box.getHeight();
 			return true;
 		}
 		
-		int xMin = box.getX() / 32;
-		int xMax = (box.getX() + box.getWidth() -1) / 32;
-		int y = (box.getY() + box.getHeight() + 1) / 32;
+		int xMin = x / 32;
+		int xMax = (x + xSize -1) / 32;
+		int yCord = (y + ySize + 1) / 32;
 		
 		for(; xMin <= xMax; xMin++)
 		{
-			if(world.hasBlockCollision(xMin, y))
+			if(world.hasBlockCollision(xMin, yCord))
 			{
 				return true;
 			}
@@ -161,18 +162,18 @@ public class Entity
 	
 	public boolean blockLeft(World world)
 	{
-		if(box == null)
+		if(!hasCollision)
 		{
 			return false;
 		}
 		
-		int yMin = box.getY() / 32;
-		int yMax = (box.getY() + box.getHeight() -1) / 32;
-		int x = (box.getX() - 1) / 32;
+		int yMin = y / 32;
+		int yMax = (y + ySize -1) / 32;
+		int xCord = (x - 1) / 32;
 		
 		for(; yMin <= yMax; yMin++)
 		{
-			if(world.hasBlockCollision(x, yMin))
+			if(world.hasBlockCollision(xCord, yMin))
 			{
 				return true;
 			}
@@ -183,18 +184,18 @@ public class Entity
 	
 	public boolean blockRight(World world)
 	{
-		if(box == null)
+		if(!hasCollision)
 		{
 			return false;
 		}
 		
-		int yMin = box.getY() / 32;
-		int yMax = (box.getY() + box.getHeight() -1) / 32;
-		int x = (box.getX() + box.getWidth() + 1) / 32;
+		int yMin = y / 32;
+		int yMax = (y + ySize -1) / 32;
+		int xCord = (x + xSize + 1) / 32;
 		
 		for(; yMin <= yMax; yMin++)
 		{
-			if(world.hasBlockCollision(x, yMin))
+			if(world.hasBlockCollision(xCord, yMin))
 			{
 				return true;
 			}
@@ -203,8 +204,13 @@ public class Entity
 		return false;
 	}
 	
-	protected Rectangle getNewCollisionBox(int width, int height)
+	public void onCollisioWithPlayer(World world, EntityPlayer player)
 	{
-		return new Rectangle(x, y, width, height);
+		
+	}
+	
+	protected Rectangle getCollisionBox()
+	{
+		return new Rectangle(x, y, xSize, ySize);
 	}
 }
