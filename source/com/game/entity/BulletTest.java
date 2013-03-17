@@ -4,13 +4,13 @@ import com.game.RenderEngine;
 
 public class BulletTest extends EntityBullet
 {	
-	public BulletTest(int x, int y, float xSpeed, float ySpeed)
+	public BulletTest(int x, int y, int xSpeed, int ySpeed)
 	{
 		this.x = x - 2;
 		this.y = y - 2;
 		
-		this.xSpeed = (int)xSpeed;
-		this.ySpeed = (int)ySpeed;
+		this.xSpeed = xSpeed;
+		this.ySpeed = ySpeed;
 		
 		xSize = 4;
 		ySize = 4;
