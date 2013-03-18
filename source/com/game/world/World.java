@@ -71,9 +71,18 @@ public class World
 		RenderEngine.push();
 		RenderEngine.setGLColor(0.2f, 0.2f, 0.2f, 1);
 		RenderEngine.fillRect(0, 512, 800, 128);
+		
 		RenderEngine.drawText(780 - RenderEngine.getTextLength("$" + game.money), 530,
 				"$" + game.money, Color.yellow);
+		
+		RenderEngine.setGLColor(0, 0, 0, 1);
+		RenderEngine.fillRect(800 - 48 - 5, 640 - 15, player.getCooldownScaled(48), 10);
 		RenderEngine.pop();
+	}
+	
+	public Tile getBlockClass(int x, int y)
+	{
+		return Tile.tileList[getBlock(x, y)];
 	}
 	
 	public int getBlock(int x, int y)
@@ -85,10 +94,24 @@ public class World
 		return 0;
 	}
 	
+	public void setBlock(byte block, int x, int y)
+	{
+		if(map.getCollumn(x) != null && y < map.getCollumn(x).blocks.length & y >= 0)
+		{
+			map.getCollumn(x).blocks[y] = block;
+		}
+	}
+	
 	public boolean hasBlockCollision(int x, int y)
 	{
 		return Tile.tileList[getBlock(x, y)] != null &&
 				Tile.tileList[getBlock(x, y)].isSolid();
+	}
+	
+	public boolean canBlockBreak(int x, int y)
+	{
+		return Tile.tileList[getBlock(x, y)] != null &&
+				Tile.tileList[getBlock(x, y)].getResistance() < 100;
 	}
 	
 	public ArrayList<Entity> getEntityList()
@@ -216,7 +239,7 @@ public class World
 			 for(int i = 0; i < 12; i++)
 			 {
 				 col[i] = new Collumn();
-				 col[i].blocks[i] = 1;
+				 col[i].blocks[i] = (byte) (i % 5);
 				 entities[i] = new EntityCoin(10);
 				 entities[i].x = i * 32 + 32;
 				 entities[i].y = i * 32;

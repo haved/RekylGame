@@ -13,8 +13,8 @@ public class BulletTest extends EntityBullet
 		this.xSpeed = xSpeed;
 		this.ySpeed = ySpeed;
 		
-		if(xSpeed == 0){xSpeed++;}
-		if(ySpeed == 0){ySpeed++;}
+		if(this.xSpeed == 0){this.xSpeed++;}
+		if(this.ySpeed == 0){this.ySpeed++;}
 		
 		xSize = 4;
 		ySize = 4;
@@ -22,17 +22,26 @@ public class BulletTest extends EntityBullet
 		hasCollision = true;
 	}
 	
-	public void tick(World w)
+	public void tick(World world)
 	{
-		super.tick(w);
+		super.tick(world);
 		if(xSpeed == 0)
 		{
+			tryHitLeft(world);
+			tryHitRight(world);
 			kill();
 		}
 		if(ySpeed == 0)
 		{
+			tryHitOver(world);
+			tryHitUnder(world);
 			kill();
 		}
+	}
+	
+	public void onHit(World w, int x, int y)
+	{
+		w.setBlock(w.getBlockClass(x, y).getBlockOnBreak(), x, y);
 	}
 	
 	public void render()

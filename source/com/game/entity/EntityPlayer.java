@@ -10,6 +10,7 @@ import com.game.world.World;
 public class EntityPlayer extends Entity
 {
 	private static boolean wasDown;
+	private int coolDown;
 	
 	public static int rotPointX = 20;
 	public static int rotPointY = 40;
@@ -39,11 +40,15 @@ public class EntityPlayer extends Entity
 	
 	private void tryShoot(World world)
 	{
+		coolDown--;
+		Math.max(0, coolDown);
+		
 		if(Mouse.isButtonDown(0))
 		{
-			if(!wasDown)
+			if(!wasDown & coolDown <= 120)
 			{
 				world.fireGun(this, getRotation());
+				coolDown += 30;
 			}
 			wasDown = true;
 		}
@@ -119,7 +124,12 @@ public class EntityPlayer extends Entity
 	{
 		 return Math.max(0, x - 256);
 	}
-
+	
+	public int getCooldownScaled(int scale)
+	{
+		return coolDown * scale / 150;
+	}
+	
 	public int getRotation()
 	{
 		int posX = x - getScroll() + rotPointX;

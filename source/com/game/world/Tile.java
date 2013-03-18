@@ -5,7 +5,10 @@ public class Tile
 	public static Tile[] tileList = new Tile[256];
 	
 	public static Tile air = new Tile(0);
-	public static Tile rock = new TileRock(1);
+	public static Tile stone = new TileRock(1);
+	public static Tile rock1 = new TileBreakable(2, 1, (byte)0);
+	public static Tile rock2 = new TileBreakable(3, 2, (byte)2);
+	public static Tile rock3 = new TileBreakable(4, 3, (byte)3);
 	
 	protected boolean solid;
 	protected int resistance = 100000;
@@ -36,7 +39,7 @@ public class Tile
 		return resistance;
 	}
 		
-	public int getBlockOnBreak()
+	public byte getBlockOnBreak()
 	{
 		return 0;
 	}
