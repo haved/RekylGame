@@ -41,11 +41,11 @@ public class EntityPlayer extends Entity
 	private void tryShoot(World world)
 	{
 		coolDown--;
-		Math.max(0, coolDown);
+		coolDown = Math.max(0, coolDown);
 		
 		if(Mouse.isButtonDown(0))
 		{
-			if(!wasDown & coolDown <= 120)
+			if(!wasDown & !isTooHot())
 			{
 				world.fireGun(this, getRotation());
 				coolDown += 30;
@@ -128,6 +128,11 @@ public class EntityPlayer extends Entity
 	public int getCooldownScaled(int scale)
 	{
 		return coolDown * scale / 150;
+	}
+	
+	public boolean isTooHot()
+	{
+		return coolDown > 120;
 	}
 	
 	public int getRotation()

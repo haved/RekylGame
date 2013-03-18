@@ -76,7 +76,13 @@ public class World
 				"$" + game.money, Color.yellow);
 		
 		RenderEngine.setGLColor(0, 0, 0, 1);
-		RenderEngine.fillRect(800 - 48 - 5, 640 - 15, player.getCooldownScaled(48), 10);
+		RenderEngine.fillRect(747, 625, player.getCooldownScaled(48), 10);
+		if(player.isTooHot())
+		{
+			RenderEngine.setGLColor(1, 0.1f, 0.1f, 1);
+			RenderEngine.fillRect(747+38, 625, player.getCooldownScaled(48) - 38, 10);
+		}
+
 		RenderEngine.pop();
 	}
 	
