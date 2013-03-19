@@ -40,6 +40,7 @@ public class EntityWave extends Entity
 		}
 		//xSpeed = 0; //Debug
 		move(world);
+		testCollisionWithPlayer(world, this);
 	}
 	
 	public void render()

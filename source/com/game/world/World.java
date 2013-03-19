@@ -44,7 +44,6 @@ public class World
 	{
 		addNewEntities();
 		tickEntities();
-		chechEntitiesOnPlayer();
 		removeDeadEntities();
 		xScroll = player.getScroll();
 		loadWorld();
@@ -174,20 +173,17 @@ public class World
 		}
 	}
 	
-	private void chechEntitiesOnPlayer()
+	public void testCollisionWithPlayer(Entity e)
 	{
 		Rectangle pBox = player.getCollisionBox();
 		
-		for(Entity e:entities)
+		if(e instanceof EntityPlayer)
 		{
-			if(e instanceof EntityPlayer)
-			{
-				continue;
-			}
-			if(pBox.intersects(e.getCollisionBox()))
-			{
-				e.onCollisionWithPlayer(this, player);
-			}
+			return;
+		}
+		else if(pBox.intersects(e.getCollisionBox()))
+		{
+			e.onCollisionWithPlayer(this, player);
 		}
 	}
 	
@@ -253,4 +249,5 @@ public class World
 			 map.addNewCollumns(xScroll / 32, col, entities); 
 		 }
 	}
+
 }

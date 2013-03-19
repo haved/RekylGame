@@ -208,6 +208,11 @@ public class Entity
 		return false;
 	}
 	
+	public void testCollisionWithPlayer(World world, Entity e)
+	{
+		world.testCollisionWithPlayer(e);
+	}
+	
 	public void onCollisionWithPlayer(World world, EntityPlayer player)
 	{
 		

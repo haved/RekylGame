@@ -21,6 +21,8 @@ public class EntityCoin extends Entity
 		life--;
 		animation++;
 		
+		testCollisionWithPlayer(w, this);
+		
 		if(life < 0)
 		{
 			kill();
