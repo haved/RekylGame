@@ -24,6 +24,7 @@ public class GuiGame extends GuiScreen
 	
 	public void endGame()
 	{
+		System.out.println("The end");
 		canvas.setGuiScreen(new GuiGameOver(this));
 	}
 	

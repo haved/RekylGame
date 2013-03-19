@@ -41,6 +41,11 @@ public class EntityWave extends Entity
 		//xSpeed = 0; //Debug
 		move(world);
 		testCollisionWithPlayer(world, this);
+		System.out.println(world.player.x - x);
+		if(hasWon & world.player.x - x < 50)
+		{
+			world.loose();
+		}
 	}
 	
 	public void render()
@@ -59,12 +64,7 @@ public class EntityWave extends Entity
 	
 	@Override
 	public void onCollisionWithPlayer(World world, EntityPlayer player)
-	{
-		if(player.x - x < 50)
-		{
-			world.loose();
-		}
-		
+	{	
 		hasWon = true;
 		player.stop();
 	}

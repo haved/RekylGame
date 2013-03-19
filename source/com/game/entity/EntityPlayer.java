@@ -40,7 +40,7 @@ public class EntityPlayer extends Entity
 	
 	private void tryShoot(World world)
 	{
-		coolDown--;
+		coolDown -= 2;
 		coolDown = Math.max(0, coolDown);
 		
 		if(Mouse.isButtonDown(0))
