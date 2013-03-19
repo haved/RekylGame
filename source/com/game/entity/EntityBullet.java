@@ -19,6 +19,8 @@ public class EntityBullet extends Entity
 	
 	public void tryHitOver(World world)
 	{
+		if(isDead()){return;};
+		
 		int xMin = x / 32;
 		int xMax = (x + xSize -1) / 32;
 		int yCoord = (y - 1) / 32;
@@ -31,6 +33,8 @@ public class EntityBullet extends Entity
 	
 	public void tryHitUnder(World world)
 	{
+		if(isDead()){return;};
+		
 		int xMin = x / 32;
 		int xMax = (x + xSize -1) / 32;
 		int yCoord = (y + ySize + 1) / 32;
@@ -43,6 +47,8 @@ public class EntityBullet extends Entity
 	
 	public void tryHitLeft(World world)
 	{
+		if(isDead()){return;};
+		
 		int yMin = y / 32;
 		int yMax = (y + ySize -1) / 32;
 		int xCoord = (x - 1) / 32;
@@ -55,6 +61,8 @@ public class EntityBullet extends Entity
 	
 	public void tryHitRight(World world)
 	{
+		if(isDead()){return;};
+		
 		int yMin = y / 32;
 		int yMax = (y + ySize -1) / 32;
 		int xCoord = (x + xSize + 1) / 32;
@@ -70,6 +78,7 @@ public class EntityBullet extends Entity
 		if(world.canBlockBreak(xBlock, yBlock))
 		{
 			onHit(world, xBlock, yBlock);
+			kill();
 			return true;
 		}
 		return false;
