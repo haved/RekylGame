@@ -14,7 +14,7 @@ public class EntityPlayer extends Entity
 	public Gun gun;
 	
 	private boolean stopped;
-	public static int rotPointX = 20;
+	public static int rotPointX = 25;
 	public static int rotPointY = 40;
 	private static boolean wasDown;
 	private static byte renderAnim;

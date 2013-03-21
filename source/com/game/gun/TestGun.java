@@ -9,13 +9,16 @@ import com.game.world.World;
 
 public class TestGun extends Gun
 {
-	public int speed = 4000;
+	public static int speed = 4000;
+	private static int barrel= 32;
 	private int heat = 0;
+	private int flash;
 	
 	@Override
 	public void fire(World w, EntityPlayer player, int rot)
 	{
 		heat += 30;
+		flash = 2;
 		
 //		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
 //				player.xSpeed + getSpeedX(rot + 2),
@@ -43,12 +46,12 @@ public class TestGun extends Gun
 	
 	public int getRealXPos(EntityPlayer player, int rot)
 	{
-		return (int) (getXPos(player) + (getXAxis(rot) * 18) + (player.xSpeed / 100));
+		return (int) (getXPos(player) + (getXAxis(rot) * barrel) + (player.xSpeed / 50));
 	}
 	
 	public int getRealYPos(EntityPlayer player, int rot)
 	{
-		return (int) (getYPos(player) + (getYAxis(rot) * 18) + (player.ySpeed / 100));
+		return (int) (getYPos(player) + (getYAxis(rot) * barrel) + (player.ySpeed / 50));
 	}
 	
 	@Override
@@ -58,7 +61,15 @@ public class TestGun extends Gun
 		RenderEngine.setGLColor(0, 0, 0, 1);
 		GL11.glTranslatef(getXPos(player), getYPos(player), 0);
 		GL11.glRotatef(rotation, 0, 0, 1);
-		RenderEngine.fillRect(-2, -3, 20, 6);
+		
+		RenderEngine.bindTexture("sprites.png");
+		RenderEngine.drawTransparentTexture(-3*2, -6*2, 16*2, 8*2,
+											32, 0, 16, 8);
+		if(flash > 0)
+		{
+			
+		}
+		
 		RenderEngine.pop();
 	}
 
@@ -66,6 +77,10 @@ public class TestGun extends Gun
 	@Override
 	public void tick(World world, EntityPlayer player)
 	{
+		if(flash > 0)
+		{
+			flash--;
+		}
 		heat -= 2;
 		heat = Math.max(heat, 0);
 	}
