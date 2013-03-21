@@ -23,6 +23,11 @@ public class EntityWave extends Entity
 		{
 			xSpeed += 50;
 			move(world);
+			if(world.player.x - x < 0)
+			{
+				world.loose();
+			}
+			
 			return;
 		}
 		
@@ -41,11 +46,6 @@ public class EntityWave extends Entity
 		//xSpeed = 0; //Debug
 		move(world);
 		testCollisionWithPlayer(world, this);
-		System.out.println(world.player.x - x);
-		if(hasWon & world.player.x - x < 50)
-		{
-			world.loose();
-		}
 	}
 	
 	public void render()

@@ -74,13 +74,9 @@ public class World
 		RenderEngine.drawText(780 - RenderEngine.getTextLength("$" + game.money), 530,
 				"$" + game.money, Color.yellow);
 		
-		RenderEngine.setGLColor(0, 0, 0, 1);
-		RenderEngine.fillRect(747, 625, player.getCooldownScaled(48), 10);
-		if(player.isTooHot())
-		{
-			RenderEngine.setGLColor(1, 0.1f, 0.1f, 1);
-			RenderEngine.fillRect(747+38, 625, player.getCooldownScaled(48) - 38, 10);
-		}
+		RenderEngine.bindTexture("gui.png");
+		RenderEngine.drawTexture(800 - 54, 600, player.gun.getHeatScaled(48), 8,
+									200, 96, player.gun.getHeatScaled(48), 8);
 
 		RenderEngine.pop();
 	}
@@ -142,16 +138,6 @@ public class World
 	public void loose()
 	{
 		game.endGame();
-	}
-	
-	public void fireGun(EntityPlayer player, int rotation)
-	{
-		game.gun.fire(this, player, rotation);
-	}
-	
-	public void renderGun(EntityPlayer player, int rot)
-	{
-		game.gun.render(player, rot);
 	}
 	
 	private void addNewEntities()

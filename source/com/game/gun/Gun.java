@@ -3,8 +3,15 @@ package com.game.gun;
 import com.game.entity.EntityPlayer;
 import com.game.world.World;
 
-public class Gun
+public abstract class Gun
 {
+	public abstract boolean canShoot();
+	
+	public void tick(World world, EntityPlayer player)
+	{
+		
+	}
+	
 	public void fire(World w, EntityPlayer player, int rotation)
 	{
 		
@@ -33,5 +40,10 @@ public class Gun
 	public float getYAxis(int rot)
 	{
 		return (float) Math.sin(Math.toRadians(rot));
+	}
+	
+	public int getHeatScaled(int scale)
+	{
+		return 0;
 	}
 }

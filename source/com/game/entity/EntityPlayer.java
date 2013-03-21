@@ -5,17 +5,18 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 
 import com.game.RenderEngine;
+import com.game.gun.Gun;
+import com.game.gun.TestGun;
 import com.game.world.World;
 
 public class EntityPlayer extends Entity
 {
-	private static boolean wasDown;
-	private int coolDown;
-	
-	public static int rotPointX = 20;
-	public static int rotPointY = 40;
+	public Gun gun;
 	
 	private boolean stopped;
+	public static int rotPointX = 20;
+	public static int rotPointY = 40;
+	private static boolean wasDown;
 	private static byte renderAnim;
 	private static int wantedSpeed = 800;
 	
@@ -26,29 +27,28 @@ public class EntityPlayer extends Entity
 		xSize = 32;
 		ySize = 64;
 		hasCollision = true;
+		
+		gun = new TestGun();
 	}
 	
 	public void tick(World world)
 	{
 		anim();
 		tryShoot(world);
-		ySpeed += 100;
 		fixSpeed(world);
+		
+		gun.tick(world, this);
 		
 		move(world);
 	}
 	
 	private void tryShoot(World world)
 	{
-		coolDown -= 2;
-		coolDown = Math.max(0, coolDown);
-		
 		if(Mouse.isButtonDown(0))
 		{
-			if(!wasDown & !isTooHot())
+			if(!wasDown & gun.canShoot())
 			{
-				world.fireGun(this, getRotation());
-				coolDown += 30;
+				gun.fire(world, this, getRotation());
 			}
 			wasDown = true;
 		}
@@ -66,6 +66,8 @@ public class EntityPlayer extends Entity
 	
 	private void fixSpeed(World world)
 	{
+		ySpeed += 100;
+		
 		if(stopped){xSpeed = 0; return;}
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_SPACE))
@@ -117,22 +119,12 @@ public class EntityPlayer extends Entity
 			RenderEngine.drawText(x + (32 - RenderEngine.getTextLength("" + -(y + ySize))) / 2, 30,
 					"" + -(y + ySize), Color.black);
 		}
-		w.renderGun(this, getRotation());
+		gun.render(this, getRotation());
 	}
 
 	public int getScroll()
 	{
 		 return Math.max(0, x - 256);
-	}
-	
-	public int getCooldownScaled(int scale)
-	{
-		return coolDown * scale / 150;
-	}
-	
-	public boolean isTooHot()
-	{
-		return coolDown > 120;
 	}
 	
 	public int getRotation()

@@ -10,10 +10,13 @@ import com.game.world.World;
 public class TestGun extends Gun
 {
 	public int speed = 4000;
+	private int heat = 0;
 	
 	@Override
 	public void fire(World w, EntityPlayer player, int rot)
 	{
+		heat += 30;
+		
 //		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
 //				player.xSpeed + getSpeedX(rot + 2),
 //				player.ySpeed + getSpeedY(rot + 2)));
@@ -57,5 +60,24 @@ public class TestGun extends Gun
 		GL11.glRotatef(rotation, 0, 0, 1);
 		RenderEngine.fillRect(-2, -3, 20, 6);
 		RenderEngine.pop();
+	}
+
+	
+	@Override
+	public void tick(World world, EntityPlayer player)
+	{
+		heat -= 2;
+		heat = Math.max(heat, 0);
+	}
+	
+	@Override
+	public boolean canShoot()
+	{
+		return heat <= 120;
+	}
+	
+	public int getHeatScaled(int scale)
+	{
+		return heat * scale / 150;
 	}
 }
