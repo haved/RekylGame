@@ -51,7 +51,7 @@ public class TestGun extends Gun
 	
 	public int getRealYPos(EntityPlayer player, int rot)
 	{
-		return (int) (getYPos(player) + getTipY(rot) + (player.ySpeed / 50));
+		return (int) (getYPos(player) + getTipY(rot) + (player.ySpeed / 50)) - 8;
 	}
 	
 	public int getTipX(int rot)

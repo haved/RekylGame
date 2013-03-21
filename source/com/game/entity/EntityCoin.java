@@ -37,8 +37,11 @@ public class EntityCoin extends Entity
 	@Override
 	public void onCollisionWithPlayer(World world, EntityPlayer player)
 	{
-		world.addMoney(value);
-		kill();
+		if(!isDead())
+		{
+			world.addMoney(value);
+			kill();
+		}
 	}
 	
 	public void render()
