@@ -46,28 +46,41 @@ public class TestGun extends Gun
 	
 	public int getRealXPos(EntityPlayer player, int rot)
 	{
-		return (int) (getXPos(player) + (getXAxis(rot) * barrel) + (player.xSpeed / 50));
+		return (int) (getXPos(player) + getTipX(rot) + (player.xSpeed / 50));
 	}
 	
 	public int getRealYPos(EntityPlayer player, int rot)
 	{
-		return (int) (getYPos(player) + (getYAxis(rot) * barrel) + (player.ySpeed / 50));
+		return (int) (getYPos(player) + getTipY(rot) + (player.ySpeed / 50));
+	}
+	
+	public int getTipX(int rot)
+	{
+		return (int) (getXAxis(rot) * barrel);
+	}
+	
+	public int getTipY(int rot)
+	{
+		return (int) (getYAxis(rot) * barrel);
 	}
 	
 	@Override
-	public void render(EntityPlayer player, int rotation)
+	public void render(EntityPlayer player, int rot)
 	{
 		RenderEngine.push();
 		RenderEngine.setGLColor(0, 0, 0, 1);
 		GL11.glTranslatef(getXPos(player), getYPos(player), 0);
-		GL11.glRotatef(rotation, 0, 0, 1);
+		GL11.glRotatef(rot, 0, 0, 1);
+		
+		RenderEngine.resetColor();
 		
 		RenderEngine.bindTexture("sprites.png");
 		RenderEngine.drawTransparentTexture(-3*2, -6*2, 16*2, 8*2,
 											32, 0, 16, 8);
 		if(flash > 0)
 		{
-			
+			RenderEngine.drawTransparentTexture(barrel - 3, -8 + -8, 32, 16,
+			32, 8, 16, 8); //The last -8 is because the barrel is higher than the rotation
 		}
 		
 		RenderEngine.pop();
