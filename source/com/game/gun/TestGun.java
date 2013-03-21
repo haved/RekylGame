@@ -79,7 +79,7 @@ public class TestGun extends Gun
 											32, 0, 16, 8);
 		if(flash > 0)
 		{
-			RenderEngine.drawTransparentTexture(barrel - 3, -8 + -8, 32, 16,
+			RenderEngine.drawTransparentTexture(barrel - 6, -8 + -8, 32, 16,
 			32, 8, 16, 8); //The last -8 is because the barrel is higher than the rotation
 		}
 		
