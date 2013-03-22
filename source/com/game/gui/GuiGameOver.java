@@ -1,15 +1,25 @@
 package com.game.gui;
 
 import com.game.RenderEngine;
+import com.game.guiObject.GuiObjTextField;
 
 public class GuiGameOver extends GuiContainer
 {
 	public Integer money;
 	
+	public GuiObjTextField field;
+	
 	public GuiGameOver(GuiGame game)
 	{
 		super(game);
 		money = game.money;
+		initObjects();
+	}
+	
+	private void initObjects()
+	{
+		field = new GuiObjTextField(100, 100, 200, 50);
+		add(field);
 	}
 	
 	public void tick()
