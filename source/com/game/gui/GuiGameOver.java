@@ -23,7 +23,7 @@ public class GuiGameOver extends GuiContainer
 		RenderEngine.resetColor();
 		RenderEngine.bindTexture("gui.png");
 		RenderEngine.drawSquareWithTexture(0, 0, 800, 640, 100, 96, 100, 94);
-		RenderEngine.pop ();
+		RenderEngine.pop();
 		renderObj();
 	}
 }
