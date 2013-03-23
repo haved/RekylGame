@@ -26,7 +26,7 @@ public class GuiObjTextField extends GuiObject
 		this.text = text;
 	}
 	
-	@Override
+	@Override 
 	public void tick()
 	{
 		

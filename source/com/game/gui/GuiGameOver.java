@@ -1,19 +1,38 @@
 package com.game.gui;
 
 import com.game.RenderEngine;
+import com.game.guiObject.ButtonListener;
+import com.game.guiObject.GuiObjButton;
 import com.game.guiObject.GuiObjTextField;
 
-public class GuiGameOver extends GuiContainer
+public class GuiGameOver extends GuiContainer implements ButtonListener
 {
 	public Integer money;
 	
 	public GuiObjTextField field;
+	public GuiObjButton[] buttons;
 	
 	public GuiGameOver(GuiGame game)
 	{
-		super(game);
 		money = game.money;
+		initButtons();
 		initObjects();
+	}
+	
+	private void initButtons()
+	{
+		buttons = new GuiObjButton[3];
+		
+		buttons[0] = new GuiObjButton("Main Menu", 32, 17*32, 11*32, 2*32);
+		buttons[0].setListener(this);
+		buttons[1] = new GuiObjButton("Retry", 13*32, 17*32, 11*32, 2*32);
+		buttons[1].setListener(this);
+		buttons[2] = new GuiObjButton("Submit", 32, 13*32, 11*32, 3*32);
+		buttons[2].setListener(this);
+		
+		add(buttons[0]);
+		add(buttons[1]);
+		//add(buttons[2]);
 	}
 	
 	private void initObjects()
@@ -29,11 +48,38 @@ public class GuiGameOver extends GuiContainer
 	
 	public void render()
 	{
+		renderBG();
+		renderObj();
+		renderText();
+	}
+	
+	private void renderBG()
+	{
 		RenderEngine.push();
 		RenderEngine.resetColor();
 		RenderEngine.bindTexture("gui.png");
-		RenderEngine.drawSquareWithTexture(0, 0, 800, 640, 100, 96, 100, 94);
+		RenderEngine.drawTexture(0, 0, 800, 640, 100, 96, 100, 94);
 		RenderEngine.pop();
-		renderObj();
+	}
+	
+	private void renderText()
+	{
+		RenderEngine.push();
+		
+		RenderEngine.pop();
+	}
+	
+	@Override
+	public void buttonPressed(GuiObjButton source)
+	{
+		if(source == buttons[0])
+		{
+			canvas.setGuiScreen(new GuiMainMenu());
+		}
+		
+		if(source == buttons[1])
+		{
+			canvas.setGuiScreen(new GuiGame());
+		}
 	}
 }
