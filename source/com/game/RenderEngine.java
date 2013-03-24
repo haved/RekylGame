@@ -31,6 +31,7 @@ public class RenderEngine
 		font = new TrueTypeFont(new Font("Times New Roman", Font.PLAIN, 20), true);
 	}
 	
+	
 	public static void loadTexture(String location)
 	{
 		if(location.endsWith("png"))
@@ -164,9 +165,19 @@ public class RenderEngine
 		glDisable(GL_BLEND);
 	}
 	
-	public static void setCustomFont(Font f, boolean antiAlias)
+	public static TrueTypeFont getCustomFont(Font f, boolean antiAlias)
+	{
+		return new TrueTypeFont(f, antiAlias);
+	}
+	
+	public static void makeCustomFont(Font f, boolean antiAlias)
 	{
 		customFont = new TrueTypeFont(f, antiAlias);
+	}
+	
+	public static void setCustomFont(TrueTypeFont newFont)
+	{
+		customFont = newFont;
 	}
 	
 	public static void drawText(int x, int y, String text, Color c)
@@ -212,6 +223,12 @@ public class RenderEngine
 	public static int getCustomTextHeight(String text)
 	{
 		return customFont.getHeight(text);
+	}
+	
+	
+	public static void setScale(float x, float y)
+	{
+		glScalef(x, y, 0);
 	}
 	
 	public static void push()
