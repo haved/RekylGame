@@ -3,6 +3,7 @@ package com.game.gui;
 import java.awt.Font;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 
 import com.game.RenderEngine;
 import com.game.guiObject.ButtonListener;
@@ -13,6 +14,8 @@ import com.game.guiObject.HighscoreData;
 
 public class GuiGameOver extends GuiContainer implements ButtonListener
 {
+	private static TrueTypeFont moneyFont;
+	
 	public Integer money;
 	
 	public HighscoreData data;
@@ -23,6 +26,7 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 	public GuiGameOver(GuiGame game)
 	{
 		money = game.money;
+		moneyFont = RenderEngine.getCustomFont(new Font("Dialog", Font.PLAIN, 50), true);
 		data = new HighscoreData(
 		"C:/Users/haavard/AppData/Roaming/haved/Rekyl/highscore.txt");
 		initButtons();
@@ -112,8 +116,11 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 		RenderEngine.drawTransparentTexture(32*14, 16, 4*32, 32, 200, 120, 56, 16);//Score
 		RenderEngine.drawTransparentTexture(32*14, 6*32, 4*32, 32, 200, 136, 56, 16);//Name
 		RenderEngine.drawTransparentTexture(32*4, 16, 4*32, 32, 200, 152, 56, 16);//Top10
-		RenderEngine.setCustomFont(new Font("Dialog", Font.PLAIN, 50), true);
-		RenderEngine.drawCustomText(32*14, 30 + 32, "$" + money.toString(), Color.yellow);
+		RenderEngine.pop();
+		
+		RenderEngine.push();
+		RenderEngine.setCustomFont(moneyFont);
+		RenderEngine.drawCustomText(32*14, 62, "$" + money.toString(), Color.yellow);
 		RenderEngine.pop();
 	}
 	

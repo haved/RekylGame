@@ -89,7 +89,10 @@ public class GuiObjButton extends GuiObject
 		
 		if(!enabled)
 		{
+			RenderEngine.push();
 			RenderEngine.setGLColor(0, 0, 0, 0.5f);
+			RenderEngine.fillTransparentRect(x, y, width, height);
+			RenderEngine.pop();
 		}
 	}
 

@@ -160,7 +160,6 @@ public class RenderEngine
 	public static void fillTransparentRect(int x, int y, int width, int height)
 	{
 		glEnable(GL_BLEND);
-		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		drawSqare(x, y, width, height);
 		glDisable(GL_BLEND);
 	}

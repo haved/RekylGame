@@ -97,7 +97,7 @@ public class HighscoreData
 		setFile(new String[]{
 				"HRK:1200",
 				"PER:700",
-				"PÅL:650",
+				"PAL:650",
 				"ESP:590",
 				"JAN:550",
 				"HRK:400",
