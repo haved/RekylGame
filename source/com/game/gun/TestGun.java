@@ -1,7 +1,5 @@
 package com.game.gun;
 
-import org.lwjgl.opengl.GL11;
-
 import com.game.RenderEngine;
 import com.game.entity.BulletTest;
 import com.game.entity.EntityPlayer;
@@ -69,8 +67,8 @@ public class TestGun extends Gun
 	{
 		RenderEngine.push();
 		RenderEngine.setGLColor(0, 0, 0, 1);
-		GL11.glTranslatef(getXPos(player), getYPos(player), 0);
-		GL11.glRotatef(rot, 0, 0, 1);
+		RenderEngine.setTranslation(getXPos(player), getYPos(player));
+		RenderEngine.setRotation(0, 0, rot);
 		
 		RenderEngine.resetColor();
 		

@@ -230,6 +230,18 @@ public class RenderEngine
 		glScalef(x, y, 0);
 	}
 	
+	public static void setTranslation(float x, float y)
+	{
+		glTranslatef(x, y, 0);
+	}
+	
+	public static void setRotation(float x, float y, float z)
+	{
+		glRotatef(1, 0, 0, x);
+		glRotatef(0, 1, 0, y);
+		glRotatef(0, 0, 1, z);
+	}
+	
 	public static void push()
 	{
 		glPushMatrix();

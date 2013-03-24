@@ -77,6 +77,7 @@ public class GuiObjButton extends GuiObject
 		if(!enabled)
 		{
 			yI = 0;
+			RenderEngine.setGLColor(0.5f, 0.5f, 0.5f, 1f);
 		}
 		
 		RenderEngine.push();
@@ -86,14 +87,6 @@ public class GuiObjButton extends GuiObject
 		RenderEngine.drawText(x + (width - RenderEngine.getTextLength(text)) / 2,
 				y + (height - RenderEngine.getTextHeight(text)) / 2
 				, text, Color.white);
-		
-		if(!enabled)
-		{
-			RenderEngine.push();
-			RenderEngine.setGLColor(0, 0, 0, 0.5f);
-			RenderEngine.fillTransparentRect(x, y, width, height);
-			RenderEngine.pop();
-		}
 	}
 
 	@Override
