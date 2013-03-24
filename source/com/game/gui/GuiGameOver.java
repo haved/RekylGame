@@ -74,13 +74,6 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 		field.setEnabled(val);
 	}
 	
-	@Override
-	public void onClose()
-	{
-		super.onClose();
-		data.save();
-	}
-	
 	public void tick()
 	{
 		tickObj();
@@ -142,6 +135,7 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 		else if(source == buttons[2])
 		{
 			data.addEntry(field.getText(), money);
+			data.save();
 			list.setHighlight(10);
 			enableSubmission(false);
 		}

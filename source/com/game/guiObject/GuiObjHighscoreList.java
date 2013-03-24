@@ -52,13 +52,16 @@ public class GuiObjHighscoreList extends GuiObject
 			
 			RenderEngine.fillRect(0, i*(height/10), width, height/10);
 			
-			RenderEngine.setCustomFont(textFont);
-			RenderEngine.drawCustomText(2, i*(height/10) + 2, data.getNameAt(i),
-					highlight == i ? Color.cyan : Color.white);
+			if(i == highlight){continue;}
 			
-			RenderEngine.drawCustomText(width-2-RenderEngine.getCustomTextLength("$"+data.getValueAt(i)),
-					i*(height/10) + 2, "$"+data.getValueAt(i),
-					highlight == i ? Color.cyan : Color.yellow);
+			int j = i;
+			if(i > highlight){j--;}
+			
+			RenderEngine.setCustomFont(textFont);
+			RenderEngine.drawCustomText(2, i*(height/10) + 2, data.getNameAt(j), Color.white);
+			
+			RenderEngine.drawCustomText(width-2-RenderEngine.getCustomTextLength("$"+data.getValueAt(j)),
+					i*(height/10) + 2, "$"+data.getValueAt(j), Color.yellow);
 		}
 		RenderEngine.pop();
 	}
