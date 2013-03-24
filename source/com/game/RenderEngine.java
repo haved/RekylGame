@@ -237,9 +237,9 @@ public class RenderEngine
 	
 	public static void setRotation(float x, float y, float z)
 	{
-		glRotatef(1, 0, 0, x);
-		glRotatef(0, 1, 0, y);
-		glRotatef(0, 0, 1, z);
+		glRotatef(x, 1, 0, 0);
+		glRotatef(y, 0, 1, 0);
+		glRotatef(z, 0, 0, 1);
 	}
 	
 	public static void push()
