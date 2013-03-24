@@ -8,6 +8,7 @@ import com.game.RenderEngine;
 
 public class GuiObjButton extends GuiObject 
 {
+	private boolean enabled;
 	private ButtonListener listener;
 	private String text;
 	private boolean mouseOver;
@@ -16,7 +17,7 @@ public class GuiObjButton extends GuiObject
 	
 	public GuiObjButton()
 	{
-		
+		enabled = true;
 	}
 	
 	public GuiObjButton(String text)
@@ -46,11 +47,22 @@ public class GuiObjButton extends GuiObject
 		return listener;
 	}
 	
+	public void setEnabled(boolean enabled)
+	{
+		this.enabled = enabled;
+	}
+	
+	public boolean isEnabled()
+	{
+		return enabled;
+	}
+	
 	@Override
 	public void render()
 	{
 		RenderEngine.bindTexture("gui.png");
 		RenderEngine.resetColor();
+		
 		int yI = 0;
 		
 		if(mouseOver & mouseDown)
@@ -62,6 +74,11 @@ public class GuiObjButton extends GuiObject
 			yI = 32;
 		}
 		
+		if(!enabled)
+		{
+			yI = 0;
+		}
+		
 		RenderEngine.push();
 		RenderEngine.drawTexture(x, y, width, height, 0, yI, 256, 32);
 		RenderEngine.pop();
@@ -69,6 +86,11 @@ public class GuiObjButton extends GuiObject
 		RenderEngine.drawText(x + (width - RenderEngine.getTextLength(text)) / 2,
 				y + (height - RenderEngine.getTextHeight(text)) / 2
 				, text, Color.white);
+		
+		if(!enabled)
+		{
+			RenderEngine.setGLColor(0, 0, 0, 0.5f);
+		}
 	}
 
 	@Override
@@ -82,7 +104,7 @@ public class GuiObjButton extends GuiObject
 		{
 			if(mouseOver & mouseDown)
 			{
-				if(listener != null)
+				if(listener != null & enabled)
 				{
 					listener.buttonPressed(this);
 				}

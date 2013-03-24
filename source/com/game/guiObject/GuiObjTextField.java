@@ -6,6 +6,7 @@ import com.game.RenderEngine;
 
 public class GuiObjTextField extends GuiObject
 {
+	private boolean enabled;
 	private String text;
 	
 	public GuiObjTextField(int x, int y, int width, int height)
@@ -32,10 +33,30 @@ public class GuiObjTextField extends GuiObject
 		
 	}
 	
+	public void setEnabled(boolean enabled)
+	{
+		this.enabled = enabled;
+	}
+	
+	public boolean isEnabled()
+	{
+		return enabled;
+	}
+	
 	@Override
 	public void render()
 	{
 		RenderEngine.push();
+		
+		if(enabled)
+		{
+			RenderEngine.resetColor();
+		}
+		else
+		{
+			RenderEngine.setGLColor(1, 1, 1, 0.5f);
+		}
+		
 		RenderEngine.bindTexture("gui.png");
 		RenderEngine.drawTexture(x, y, width, height, 200, 104, 48, 16);
 		if(text != null)
