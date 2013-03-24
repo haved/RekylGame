@@ -119,7 +119,6 @@ public class HighscoreData
 		{
 			if(lineNumber < 10)
 			{
-				System.out.println(line);
 				name[lineNumber] = line.split(":")[0];
 				val[lineNumber] = Integer.parseInt(line.split(":")[1]);
 				lineNumber++;
@@ -165,7 +164,7 @@ public class HighscoreData
 	{
 		for(int i = 0; i < val.length; i++)
 		{
-			if(cap >= i)
+			if(cap >= val[i])
 			{
 				return i;
 			}

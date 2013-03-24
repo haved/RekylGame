@@ -53,6 +53,7 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 	private void initObjects()
 	{
 		field = new GuiObjTextField(14*32, 8*32, 10*32, 3*32);
+		field.setText("ABC");
 		add(field);
 		list = new GuiObjHighscoreList(data, 7, 55);
 		add(list);
@@ -61,7 +62,8 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 	private void loadData()
 	{
 		data.load();
-		enableSubmission(true);
+		list.setHighlight(data.getListSpot(money));
+		enableSubmission(data.getListSpot(money) < 10);
 	}
 	
 	private void enableSubmission(boolean val)
@@ -133,10 +135,15 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 		{
 			canvas.setGuiScreen(new GuiMainMenu());
 		}
-		
-		if(source == buttons[1])
+		else if(source == buttons[1])
 		{
 			canvas.setGuiScreen(new GuiGame());
+		}
+		else if(source == buttons[2])
+		{
+			data.addEntry(field.getText(), money);
+			list.setHighlight(10);
+			enableSubmission(false);
 		}
 	}
 }
