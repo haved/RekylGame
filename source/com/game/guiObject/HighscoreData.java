@@ -160,4 +160,46 @@ public class HighscoreData
 	{
 		return val[i];
 	}
-}
+	
+	public int getListSpot(int cap)
+	{
+		for(int i = 0; i < val.length; i++)
+		{
+			if(cap >= i)
+			{
+				return i;
+			}
+		}
+		return 10; //Looser
+	}
+
+	public void addEntry(String name, int val)
+	{
+		int spot = getListSpot(val);
+		
+		String[] newNames = new String[10];
+		int[] newVal = new int[10];
+		
+		for(int i = 0; i < 10; i++)
+		{
+			if(i < spot)
+			{
+				newNames[i] = this.name[i];
+				newVal[i] = this.val[i];
+			}
+			else if(i == spot)
+			{
+				newNames[i] = name;
+				newVal[i] = val;
+			}
+			else
+			{
+				newNames[i] = this.name[i-1];
+				newVal[i] = this.val[i-1];
+			}
+		}
+		
+		this.name = newNames;
+		this.val = newVal;
+	}
+ }
