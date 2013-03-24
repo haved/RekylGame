@@ -1,9 +1,15 @@
 package com.game.guiObject;
 
+import java.awt.Font;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
+
 import com.game.RenderEngine;
 
 public class GuiObjHighscoreList extends GuiObject
 {
+	private static TrueTypeFont textFont;
 	private HighscoreData data;
 	
 	public GuiObjHighscoreList(HighscoreData data, int x, int y)
@@ -11,8 +17,13 @@ public class GuiObjHighscoreList extends GuiObject
 		this.data = data;
 		this.x = x;
 		this.y = y;
-		width = 12*32;
-		height = 14*32;
+		width = 386;
+		height = 450;
+		
+		if(textFont == null)
+		{
+			textFont = RenderEngine.getCustomFont(new Font("Dialog", Font.PLAIN, 30),  true);
+		}
 	}
 	
 	@Override
@@ -25,8 +36,20 @@ public class GuiObjHighscoreList extends GuiObject
 	public void render() 
 	{
 		RenderEngine.push();
-		RenderEngine.setGLColor(0, 0, 0, 1);
-		RenderEngine.fillRect(x, y, width, height);
+		RenderEngine.setTranslation(x, y);
+		for(int i = 0; i < 10; i++)
+		{
+			if(i%2 == 0){RenderEngine.setGLColor(0.6f, 0.6f, 0.6f, 1);}
+			else{RenderEngine.setGLColor(0.4f, 0.4f, 0.4f, 1);}
+			
+			RenderEngine.fillRect(0, i*(height/10), width, height/10);
+			
+			RenderEngine.setCustomFont(textFont);
+			RenderEngine.drawCustomText(2, i*(height/10) + 2, data.getNameAt(i), Color.white);
+			
+			RenderEngine.drawCustomText(width-2-RenderEngine.getCustomTextLength("$"+data.getValueAt(i)),
+					i*(height/10) + 2, "$"+data.getValueAt(i), Color.yellow);
+		}
 		RenderEngine.pop();
 	}
 }

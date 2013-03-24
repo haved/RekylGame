@@ -54,7 +54,7 @@ public class GuiGameOver extends GuiContainer implements ButtonListener
 	{
 		field = new GuiObjTextField(14*32, 8*32, 10*32, 3*32);
 		add(field);
-		list = new GuiObjHighscoreList(data, 8, 56);
+		list = new GuiObjHighscoreList(data, 7, 55);
 		add(list);
 	}
 	
