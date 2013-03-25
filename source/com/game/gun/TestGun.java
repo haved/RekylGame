@@ -18,15 +18,15 @@ public class TestGun extends Gun
 		heat += 30;
 		flash = 2;
 		
-//		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
-//				player.xSpeed + getSpeedX(rot + 2),
-//				player.ySpeed + getSpeedY(rot + 2)));
+		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
+				player.xSpeed + getSpeedX(rot + 1),
+				player.ySpeed + getSpeedY(rot + 1)));
 		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
 				player.xSpeed + getSpeedX(rot),
 				player.ySpeed + getSpeedY(rot)));
-//		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
-//				player.xSpeed + getSpeedX(rot - 2),
-//				player.ySpeed + getSpeedY(rot - 2)));
+		w.addEntity(new BulletTest(getRealXPos(player, rot), getRealYPos(player, rot),
+				player.xSpeed + getSpeedX(rot - 1),
+				player.ySpeed + getSpeedY(rot - 1)));
 		
 		player.xSpeed -= getXAxis(rot) * 500;
 		player.ySpeed -= getYAxis(rot) * 1000;
